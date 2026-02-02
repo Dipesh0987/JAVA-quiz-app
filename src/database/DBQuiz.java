@@ -591,4 +591,49 @@ public class DBQuiz {
         }
         return stats;
     }
+
+    // Get detailed player statistics for Admin Panel
+    public static java.util.Map<String, String> getPlayerDetailedStats(int userId) {
+        java.util.Map<String, String> stats = new java.util.HashMap<>();
+        String url = "jdbc:mysql://localhost:3306/quiz_app";
+        String dbUsername = "root";
+        String dbPassword = "";
+
+        String query = "SELECT " +
+                "COUNT(*) as games_played, " +
+                "SUM(total_questions) as total_attempts, " +
+                "MAX(score) as best_score, " +
+                "AVG(score) as avg_score, " +
+                "(SELECT date_played FROM scores WHERE user_id = ? ORDER BY score DESC, date_played DESC LIMIT 1) as best_score_time "
+                +
+                "FROM scores WHERE user_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, dbUsername, dbPassword);
+                PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                stats.put("Games Played", String.valueOf(rs.getInt("games_played")));
+                stats.put("Questions Attempted", String.valueOf(rs.getInt("total_attempts")));
+                stats.put("Best Score", String.valueOf(rs.getInt("best_score")));
+                stats.put("Average Score", String.format("%.2f", rs.getDouble("avg_score")));
+                Timestamp ts = rs.getTimestamp("best_score_time");
+                stats.put("Best Score Time", ts != null ? ts.toString() : "N/A");
+            } else {
+                stats.put("Games Played", "0");
+                stats.put("Questions Attempted", "0");
+                stats.put("Best Score", "0");
+                stats.put("Average Score", "0.00");
+                stats.put("Best Score Time", "N/A");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error fetching player detailed stats: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return stats;
+    }
 }
