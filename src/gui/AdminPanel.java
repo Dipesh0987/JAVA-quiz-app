@@ -64,7 +64,7 @@ public class AdminPanel extends JFrame {
 		});
 		add.setBackground(new Color(192, 192, 192));
 		add.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		add.setBounds(43, 183, 84, 20);
+		add.setBounds(43, 183, 84, 29);
 		contentPane.add(add);
 		
 		JButton view = new JButton("View");
@@ -77,7 +77,7 @@ public class AdminPanel extends JFrame {
 		});
 		view.setBackground(new Color(192, 192, 192));
 		view.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		view.setBounds(137, 183, 84, 20);
+		view.setBounds(137, 183, 84, 29);
 		contentPane.add(view);
 		
 		JButton Update = new JButton("Update");
@@ -90,7 +90,7 @@ public class AdminPanel extends JFrame {
 		});
 		Update.setBackground(new Color(192, 192, 192));
 		Update.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		Update.setBounds(43, 226, 84, 20);
+		Update.setBounds(43, 226, 84, 29);
 		contentPane.add(Update);
 		
 		JButton delete = new JButton("Delete");
@@ -103,7 +103,7 @@ public class AdminPanel extends JFrame {
 		});
 		delete.setBackground(new Color(192, 192, 192));
 		delete.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		delete.setBounds(137, 226, 84, 20);
+		delete.setBounds(137, 226, 84, 29);
 		contentPane.add(delete);
 		
 		JLabel lblNewLabel_2 = new JLabel("Quiz Management System");
@@ -135,7 +135,7 @@ public class AdminPanel extends JFrame {
 		});
 		stats.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		stats.setBackground(new Color(192, 192, 192));
-		stats.setBounds(380, 184, 137, 19);
+		stats.setBounds(380, 184, 137, 28);
 		contentPane.add(stats);
 		
 		JButton search = new JButton("Players");
@@ -148,7 +148,7 @@ public class AdminPanel extends JFrame {
 		});
 		search.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		search.setBackground(new Color(192, 192, 192));
-		search.setBounds(380, 227, 137, 19);
+		search.setBounds(380, 227, 137, 28);
 		contentPane.add(search);
 
 	}
