@@ -95,21 +95,29 @@ public class PlayQuiz extends JFrame {
 		contentPane.add(questionTextArea);
 		
 		optionA = new JRadioButton("");
+		optionA.setForeground(new Color(255, 255, 255));
+		optionA.setBackground(new Color(0, 0, 255));
 		optionA.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionA.setBounds(50, 230, 260, 33);
 		contentPane.add(optionA);
 		
 		optionB = new JRadioButton("");
+		optionB.setForeground(new Color(255, 255, 255));
+		optionB.setBackground(new Color(0, 0, 255));
 		optionB.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionB.setBounds(350, 230, 260, 35);
 		contentPane.add(optionB);
 		
 		optionC = new JRadioButton("");
+		optionC.setForeground(new Color(255, 255, 255));
+		optionC.setBackground(new Color(0, 0, 255));
 		optionC.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionC.setBounds(50, 280, 260, 33);
 		contentPane.add(optionC);
 		
 		optionD = new JRadioButton("");
+		optionD.setForeground(new Color(255, 255, 255));
+		optionD.setBackground(new Color(0, 0, 255));
 		optionD.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionD.setBounds(350, 280, 260, 35);
 		contentPane.add(optionD);
@@ -130,6 +138,7 @@ public class PlayQuiz extends JFrame {
 		contentPane.add(nextButton);
 		
 		JButton back = new JButton("Quit");
+		back.setBackground(new Color(255, 0, 0));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				quitGame();

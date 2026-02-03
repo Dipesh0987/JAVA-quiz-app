@@ -79,9 +79,9 @@ public class Login extends JFrame {
 				performLogin();
 			}
 		});
-		login.setBackground(new Color(192, 192, 192));
+		login.setBackground(new Color(0, 255, 0));
 		login.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		login.setBounds(148, 223, 114, 20);
+		login.setBounds(148, 223, 114, 32);
 		contentPane.add(login);
 		
 		JLabel lblNewLabel_1 = new JLabel("Don't Have an Account? Register Here.");
@@ -98,9 +98,9 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
-		register.setBackground(new Color(192, 192, 192));
+		register.setBackground(new Color(0, 128, 255));
 		register.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		register.setBounds(148, 296, 114, 20);
+		register.setBounds(148, 296, 114, 32);
 		contentPane.add(register);
 	}
 	
