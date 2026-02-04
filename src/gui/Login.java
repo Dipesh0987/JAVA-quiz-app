@@ -105,7 +105,7 @@ public class Login extends JFrame {
 	}
 	
 	private void performLogin() {
-	    String enteredUsername = username.getText().trim();           // .trim() is good practice
+	    String enteredUsername = username.getText().trim();
 	    String enteredPassword = new String(password.getPassword()).trim();
 
 	    // Step 1: Check for empty inputs
