@@ -16,6 +16,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import database.DBQuiz;
+import java.awt.Color;
 
 public class ScoreViewGUI extends JFrame {
 
@@ -60,6 +61,7 @@ public class ScoreViewGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton back = new JButton("Back");
+		back.setBackground(new Color(192, 192, 192));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserDashboard dashboard = new UserDashboard(currentUsername);
@@ -68,7 +70,7 @@ public class ScoreViewGUI extends JFrame {
 			}
 		});
 		back.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		back.setBounds(10, 10, 84, 20);
+		back.setBounds(10, 10, 84, 18);
 		contentPane.add(back);
 		
 		JLabel lblNewLabel = new JLabel("Your Quiz Scores");
@@ -96,6 +98,7 @@ public class ScoreViewGUI extends JFrame {
 		scrollPane.setViewportView(scoresTable);
 		
 		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.setBackground(new Color(192, 192, 192));
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadScores();
@@ -106,6 +109,7 @@ public class ScoreViewGUI extends JFrame {
 		contentPane.add(btnRefresh);
 		
 		JButton btnClearAll = new JButton("Clear All Scores");
+		btnClearAll.setBackground(new Color(192, 192, 192));
 		btnClearAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clearAllScores();

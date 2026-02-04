@@ -105,34 +105,49 @@ public class Login extends JFrame {
 	}
 	
 	private void performLogin() {
-		String enteredUsername = username.getText();
-		String enteredPassword = new String(password.getPassword());
-		
-		if (enteredUsername.isEmpty() || enteredPassword.isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Please enter both username and password", 
-				"Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		
-		// Use database authentication instead of hardcoded values
-		if (DBLogin.authenticate(enteredUsername, enteredPassword)) {
-		    String role = DBLogin.getUserRole(enteredUsername);
-		    
-		    if ("admin".equals(role)) {
-		        JOptionPane.showMessageDialog(this, "Login successful as Admin!", 
-		            "Success", JOptionPane.INFORMATION_MESSAGE);
-		        AdminPanel adminPanel = new AdminPanel();
-		        adminPanel.setVisible(true);
-		        dispose();
-		    } else {
-		        JOptionPane.showMessageDialog(this, "Login successful as User!", 
-		            "Success", JOptionPane.INFORMATION_MESSAGE);
-		        // FIX: Pass username to UserDashboard
-		        UserDashboard userDashboard = new UserDashboard(enteredUsername);
-		        userDashboard.setVisible(true);
-		        dispose();
-		 
-		    }
-		}
+	    String enteredUsername = username.getText().trim();           // .trim() is good practice
+	    String enteredPassword = new String(password.getPassword()).trim();
+
+	    // Step 1: Check for empty inputs
+	    if (enteredUsername.isEmpty() || enteredPassword.isEmpty()) {
+	        JOptionPane.showMessageDialog(this, 
+	            "Please enter both username and password",
+	            "Input Required", 
+	            JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+
+	    // Step 2: Try to authenticate against database
+	    if (DBLogin.authenticate(enteredUsername, enteredPassword)) {
+	        // Success
+	        String role = DBLogin.getUserRole(enteredUsername);
+
+	        JOptionPane.showMessageDialog(this, 
+	            "Login successful!", 
+	            "Welcome", 
+	            JOptionPane.INFORMATION_MESSAGE);
+
+	        if ("admin".equals(role)) {
+	            AdminPanel adminPanel = new AdminPanel();
+	            adminPanel.setVisible(true);
+	        } else {
+	            // Assuming most other roles are normal users
+	            UserDashboard userDashboard = new UserDashboard(enteredUsername);
+	            userDashboard.setVisible(true);
+	        }
+	        
+	        dispose();  // close login window
+	    } 
+	    else {
+	        // ← This is the missing part!
+	        JOptionPane.showMessageDialog(this, 
+	            "Incorrect username or password", 
+	            "Login Failed", 
+	            JOptionPane.ERROR_MESSAGE);
+	        
+	        // Optional: clear password field after failed attempt
+	        password.setText("");
+	        password.requestFocus();
+	    }
 	}
 }
