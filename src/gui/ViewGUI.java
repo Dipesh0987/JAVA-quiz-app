@@ -18,6 +18,7 @@ import java.util.List;
 // Import the MySQL database classes
 import database.DBFetch;
 import models.Question;
+import java.awt.Color;
 
 public class ViewGUI extends JFrame {
 
@@ -73,6 +74,8 @@ public class ViewGUI extends JFrame {
 		contentPane.add(questionTextArea);
 		
 		JButton back = new JButton("Back");
+		back.setForeground(new Color(255, 255, 255));
+		back.setBackground(new Color(4, 121, 251));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel ad = new AdminPanel();
@@ -81,7 +84,7 @@ public class ViewGUI extends JFrame {
 			}
 		});
 		back.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		back.setBounds(10, 10, 84, 20);
+		back.setBounds(10, 10, 84, 32);
 		contentPane.add(back);
 		
 		questionIdField = new JTextField();
@@ -92,6 +95,8 @@ public class ViewGUI extends JFrame {
 		questionIdField.setColumns(10);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setForeground(new Color(255, 255, 255));
+		btnSearch.setBackground(new Color(4, 121, 251));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchQuestion();
@@ -155,6 +160,8 @@ public class ViewGUI extends JFrame {
 		
 		// Add "View All" button
 		JButton btnViewAll = new JButton("View All Questions");
+		btnViewAll.setForeground(new Color(255, 255, 255));
+		btnViewAll.setBackground(new Color(4, 121, 251));
 		btnViewAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				viewAllQuestions();

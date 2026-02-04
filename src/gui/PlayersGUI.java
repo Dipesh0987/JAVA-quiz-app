@@ -53,6 +53,8 @@ public class PlayersGUI extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton back = new JButton("Back");
+		back.setForeground(new Color(255, 255, 255));
+		back.setBackground(new Color(4, 121, 251));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel ap = new AdminPanel();

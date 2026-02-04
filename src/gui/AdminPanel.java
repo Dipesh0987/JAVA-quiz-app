@@ -55,6 +55,7 @@ public class AdminPanel extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JButton add = new JButton("Add");
+		add.setForeground(new Color(255, 255, 255));
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddGUI ad = new AddGUI();
@@ -62,12 +63,13 @@ public class AdminPanel extends JFrame {
 				dispose();
 			}
 		});
-		add.setBackground(new Color(192, 192, 192));
+		add.setBackground(new Color(4, 121, 251));
 		add.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		add.setBounds(43, 183, 84, 29);
 		contentPane.add(add);
 		
 		JButton view = new JButton("View");
+		view.setForeground(new Color(255, 255, 255));
 		view.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ViewGUI v = new ViewGUI();
@@ -75,12 +77,13 @@ public class AdminPanel extends JFrame {
 				dispose();
 			}
 		});
-		view.setBackground(new Color(192, 192, 192));
+		view.setBackground(new Color(4, 121, 251));
 		view.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		view.setBounds(137, 183, 84, 29);
 		contentPane.add(view);
 		
 		JButton Update = new JButton("Update");
+		Update.setForeground(new Color(255, 255, 255));
 		Update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UpdateGUI up = new UpdateGUI();
@@ -88,12 +91,13 @@ public class AdminPanel extends JFrame {
 				dispose();
 			}
 		});
-		Update.setBackground(new Color(192, 192, 192));
+		Update.setBackground(new Color(4, 121, 251));
 		Update.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		Update.setBounds(43, 226, 84, 29);
 		contentPane.add(Update);
 		
 		JButton delete = new JButton("Delete");
+		delete.setForeground(new Color(255, 255, 255));
 		delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DeleteGUI del = new DeleteGUI();
@@ -101,7 +105,7 @@ public class AdminPanel extends JFrame {
 				dispose();
 			}
 		});
-		delete.setBackground(new Color(192, 192, 192));
+		delete.setBackground(new Color(4, 121, 251));
 		delete.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		delete.setBounds(137, 226, 84, 29);
 		contentPane.add(delete);
@@ -126,6 +130,7 @@ public class AdminPanel extends JFrame {
 		contentPane.add(logout);
 		
 		JButton stats = new JButton("View Statistics");
+		stats.setForeground(new Color(255, 255, 255));
 		stats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StatisticsGUI stats = new StatisticsGUI();
@@ -134,11 +139,12 @@ public class AdminPanel extends JFrame {
 			}
 		});
 		stats.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		stats.setBackground(new Color(192, 192, 192));
+		stats.setBackground(new Color(4, 121, 251));
 		stats.setBounds(380, 184, 137, 28);
 		contentPane.add(stats);
 		
 		JButton search = new JButton("Players");
+		search.setForeground(new Color(255, 255, 255));
 		search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PlayersGUI player = new PlayersGUI();
@@ -147,7 +153,7 @@ public class AdminPanel extends JFrame {
 			}
 		});
 		search.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		search.setBackground(new Color(192, 192, 192));
+		search.setBackground(new Color(4, 121, 251));
 		search.setBounds(380, 227, 137, 28);
 		contentPane.add(search);
 

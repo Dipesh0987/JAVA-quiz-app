@@ -96,28 +96,28 @@ public class PlayQuiz extends JFrame {
 		
 		optionA = new JRadioButton("");
 		optionA.setForeground(new Color(255, 255, 255));
-		optionA.setBackground(new Color(0, 0, 255));
+		optionA.setBackground(new Color(4, 121, 251));
 		optionA.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionA.setBounds(50, 230, 260, 33);
 		contentPane.add(optionA);
 		
 		optionB = new JRadioButton("");
 		optionB.setForeground(new Color(255, 255, 255));
-		optionB.setBackground(new Color(0, 0, 255));
+		optionB.setBackground(new Color(4, 121, 251));
 		optionB.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionB.setBounds(350, 230, 260, 35);
 		contentPane.add(optionB);
 		
 		optionC = new JRadioButton("");
 		optionC.setForeground(new Color(255, 255, 255));
-		optionC.setBackground(new Color(0, 0, 255));
+		optionC.setBackground(new Color(4, 121, 251));
 		optionC.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionC.setBounds(50, 280, 260, 33);
 		contentPane.add(optionC);
 		
 		optionD = new JRadioButton("");
 		optionD.setForeground(new Color(255, 255, 255));
-		optionD.setBackground(new Color(0, 0, 255));
+		optionD.setBackground(new Color(4, 121, 251));
 		optionD.setFont(new Font("Times New Roman", Font.PLAIN, 13));
 		optionD.setBounds(350, 280, 260, 35);
 		contentPane.add(optionD);
@@ -128,6 +128,8 @@ public class PlayQuiz extends JFrame {
 		optionGroup.add(optionD);
 		
 		nextButton = new JButton("Submit Answer");
+		nextButton.setForeground(new Color(255, 255, 255));
+		nextButton.setBackground(new Color(4, 121, 251));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				processAnswer();

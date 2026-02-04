@@ -61,7 +61,8 @@ public class ScoreViewGUI extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton back = new JButton("Back");
-		back.setBackground(new Color(192, 192, 192));
+		back.setForeground(new Color(255, 255, 255));
+		back.setBackground(new Color(4, 121, 251));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UserDashboard dashboard = new UserDashboard(currentUsername);
@@ -70,7 +71,7 @@ public class ScoreViewGUI extends JFrame {
 			}
 		});
 		back.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		back.setBounds(10, 10, 84, 18);
+		back.setBounds(10, 10, 84, 29);
 		contentPane.add(back);
 		
 		JLabel lblNewLabel = new JLabel("Your Quiz Scores");
@@ -98,7 +99,8 @@ public class ScoreViewGUI extends JFrame {
 		scrollPane.setViewportView(scoresTable);
 		
 		JButton btnRefresh = new JButton("Refresh");
-		btnRefresh.setBackground(new Color(192, 192, 192));
+		btnRefresh.setForeground(new Color(255, 255, 255));
+		btnRefresh.setBackground(new Color(4, 121, 251));
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loadScores();
@@ -109,7 +111,8 @@ public class ScoreViewGUI extends JFrame {
 		contentPane.add(btnRefresh);
 		
 		JButton btnClearAll = new JButton("Clear All Scores");
-		btnClearAll.setBackground(new Color(192, 192, 192));
+		btnClearAll.setForeground(new Color(255, 255, 255));
+		btnClearAll.setBackground(new Color(4, 121, 251));
 		btnClearAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clearAllScores();

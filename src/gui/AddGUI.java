@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 // Import the MySQL database classes
 import database.DBInsertion;
+import java.awt.Color;
 
 public class AddGUI extends JFrame {
 
@@ -63,6 +64,7 @@ public class AddGUI extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton back_1 = new JButton("Back");
+		back_1.setBackground(new Color(192, 192, 192));
 		back_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel ap = new AdminPanel();
@@ -71,7 +73,7 @@ public class AddGUI extends JFrame {
 			}
 		});
 		back_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		back_1.setBounds(10, 10, 84, 20);
+		back_1.setBounds(10, 10, 84, 30);
 		contentPane.add(back_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Question");
@@ -153,6 +155,7 @@ public class AddGUI extends JFrame {
 		contentPane.add(comboBox_1);
 		
 		JButton add = new JButton("Add");
+		add.setBackground(new Color(192, 192, 192));
 		add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addQuestionToDatabase();

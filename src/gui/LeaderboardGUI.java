@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import database.DBQuiz;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class LeaderboardGUI extends JFrame {
 
@@ -68,7 +69,8 @@ public class LeaderboardGUI extends JFrame {
         contentPane.setLayout(null);
         
         JButton back = new JButton("Back");
-        back.setBounds(10, 12, 84, 20);
+        back.setBackground(new Color(4, 121, 251));
+        back.setBounds(10, 12, 84, 25);
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 UserDashboard dashboard = new UserDashboard(currentUsername);
@@ -121,6 +123,8 @@ public class LeaderboardGUI extends JFrame {
         scrollPane.setViewportView(leaderboardTable);
         
         JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setForeground(new Color(255, 255, 255));
+        btnRefresh.setBackground(new Color(4, 121, 251));
         btnRefresh.setBounds(350, 460, 120, 30);
         btnRefresh.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -133,6 +137,8 @@ public class LeaderboardGUI extends JFrame {
         
         // Add "View Your Rank" button
         JButton btnYourRank = new JButton("View Your Rank");
+        btnYourRank.setForeground(new Color(255, 255, 255));
+        btnYourRank.setBackground(new Color(4, 121, 251));
         btnYourRank.setBounds(500, 460, 140, 30);
         btnYourRank.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

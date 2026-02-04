@@ -80,7 +80,7 @@ public class Register extends JFrame {
 				performRegistration();
 			}
 		});
-		register.setBackground(new Color(192, 192, 192));
+		register.setBackground(new Color(128, 255, 0));
 		register.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		register.setBounds(175, 280, 143, 29);
 		contentPane.add(register);
@@ -93,7 +93,7 @@ public class Register extends JFrame {
 				dispose();
 			}
 		});
-		backlogin.setBackground(new Color(192, 192, 192));
+		backlogin.setBackground(new Color(0, 255, 255));
 		backlogin.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		backlogin.setBounds(175, 320, 144, 29);
 		contentPane.add(backlogin);

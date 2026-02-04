@@ -78,10 +78,11 @@ public class UserDashboard extends JFrame {
         logout.setForeground(Color.WHITE);
         logout.setFont(new Font("Times New Roman", Font.BOLD, 16));
         logout.setBackground(Color.RED);
-        logout.setBounds(376, 10, 99, 23);
+        logout.setBounds(376, 10, 99, 29);
         contentPane.add(logout);
         
         JButton play = new JButton("Play Quiz");
+        play.setBackground(new Color(128, 255, 0));
         play.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String selectedDifficulty = (String) difficultyComboBox.getSelectedItem();
@@ -102,6 +103,8 @@ public class UserDashboard extends JFrame {
         contentPane.add(play);
         
         JButton viewScore = new JButton("View Score");
+        viewScore.setForeground(new Color(255, 255, 255));
+        viewScore.setBackground(new Color(4, 121, 251));
         viewScore.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ScoreViewGUI scoreView = new ScoreViewGUI(currentUsername);
@@ -115,6 +118,8 @@ public class UserDashboard extends JFrame {
         
         // FIX: Remove the "JComboBox<String>" type declaration to use the class field
         difficultyComboBox = new JComboBox<>();
+        difficultyComboBox.setForeground(new Color(255, 255, 255));
+        difficultyComboBox.setBackground(new Color(4, 121, 251));
         difficultyComboBox.setFont(new Font("Times New Roman", Font.BOLD, 15));
         difficultyComboBox.setModel(new DefaultComboBoxModel<String>(
             new String[] {"Select Difficulty", "Beginner", "Intermediate", "Advanced"}));
@@ -122,6 +127,8 @@ public class UserDashboard extends JFrame {
         contentPane.add(difficultyComboBox);
         
         JButton leaderboard = new JButton("Leaderboard");
+        leaderboard.setForeground(new Color(255, 255, 255));
+        leaderboard.setBackground(new Color(4, 121, 251));
         leaderboard.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 LeaderboardGUI leaderboardGUI = new LeaderboardGUI(currentUsername);
@@ -133,10 +140,10 @@ public class UserDashboard extends JFrame {
         leaderboard.setBounds(332, 282, 130, 29);
         contentPane.add(leaderboard);
         
-        JLabel lblNewLabel_1 = new JLabel("Kaun Banega Crorepati");
+        JLabel lblNewLabel_1 = new JLabel("Quiz Mania");
         lblNewLabel_1.setForeground(new Color(0, 0, 255));
         lblNewLabel_1.setFont(new Font("Times New Roman", Font.BOLD, 21));
-        lblNewLabel_1.setBounds(126, 75, 246, 51);
+        lblNewLabel_1.setBounds(160, 75, 165, 51);
         contentPane.add(lblNewLabel_1);
     }
 }

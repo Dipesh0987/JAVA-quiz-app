@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import database.DBFetch;
 import database.DBUpdate;
 import models.Question;
+import java.awt.Color;
 
 public class UpdateGUI extends JFrame {
 
@@ -73,6 +74,8 @@ public class UpdateGUI extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton back_1 = new JButton("Back");
+		back_1.setForeground(new Color(255, 255, 255));
+		back_1.setBackground(new Color(4, 121, 251));
 		back_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel ap = new AdminPanel();
@@ -81,7 +84,7 @@ public class UpdateGUI extends JFrame {
 			}
 		});
 		back_1.setFont(new Font("Times New Roman", Font.BOLD, 15));
-		back_1.setBounds(10, 10, 84, 20);
+		back_1.setBounds(10, 10, 84, 27);
 		contentPane.add(back_1);
 		
 		JLabel lblQuestionId = new JLabel("Question ID:");
@@ -95,6 +98,8 @@ public class UpdateGUI extends JFrame {
 		contentPane.add(questionIdField);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setForeground(new Color(255, 255, 255));
+		btnSearch.setBackground(new Color(4, 121, 251));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchQuestion();
@@ -105,6 +110,8 @@ public class UpdateGUI extends JFrame {
 		contentPane.add(btnSearch);
 		
 		JButton btnClear = new JButton("Clear");
+		btnClear.setForeground(new Color(255, 255, 255));
+		btnClear.setBackground(new Color(4, 121, 251));
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clearForm();
@@ -179,6 +186,8 @@ public class UpdateGUI extends JFrame {
 		contentPane.add(lblNewLabel_2_2_1);
 		
 		correctOptionComboBox = new JComboBox<>();
+		correctOptionComboBox.setForeground(new Color(255, 255, 255));
+		correctOptionComboBox.setBackground(new Color(4, 121, 251));
 		correctOptionComboBox.setModel(new DefaultComboBoxModel<>(new String[] {"Select Option", "A", "B", "C", "D"}));
 		correctOptionComboBox.setSelectedIndex(0);
 		correctOptionComboBox.setFont(new Font("Times New Roman", Font.BOLD, 15));
@@ -186,6 +195,8 @@ public class UpdateGUI extends JFrame {
 		contentPane.add(correctOptionComboBox);
 		
 		difficultyComboBox = new JComboBox<>();
+		difficultyComboBox.setForeground(new Color(255, 255, 255));
+		difficultyComboBox.setBackground(new Color(4, 121, 251));
 		difficultyComboBox.setModel(new DefaultComboBoxModel<>(new String[] {"Select Difficulty", "Beginner", "Intermediate", "Advanced"}));
 		difficultyComboBox.setSelectedIndex(0);
 		difficultyComboBox.setFont(new Font("Times New Roman", Font.BOLD, 15));
@@ -193,6 +204,8 @@ public class UpdateGUI extends JFrame {
 		contentPane.add(difficultyComboBox);
 		
 		JButton btnUpdate = new JButton("Update");
+		btnUpdate.setForeground(new Color(255, 255, 255));
+		btnUpdate.setBackground(new Color(4, 121, 251));
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateQuestion();

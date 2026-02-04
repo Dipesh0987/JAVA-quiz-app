@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class StatisticsGUI extends JFrame {
 
@@ -47,6 +48,8 @@ public class StatisticsGUI extends JFrame {
 		contentPane.setLayout(null);
 
 		JButton back = new JButton("Back");
+		back.setForeground(new Color(255, 255, 255));
+		back.setBackground(new Color(4, 121, 251));
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AdminPanel ap = new AdminPanel();

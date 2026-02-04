@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import database.DBFetch;
 import database.DBDelete;
 import models.Question;
+import java.awt.Color;
 
 public class DeleteGUI extends JFrame {
 
@@ -81,6 +82,7 @@ public class DeleteGUI extends JFrame {
 		contentPane.add(questionIdField);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.setBackground(new Color(192, 192, 192));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				searchQuestion();
@@ -91,6 +93,7 @@ public class DeleteGUI extends JFrame {
 		contentPane.add(btnSearch);
 		
 		JButton btnClear = new JButton("Clear");
+		btnClear.setBackground(new Color(192, 192, 192));
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				clearForm();
@@ -111,6 +114,8 @@ public class DeleteGUI extends JFrame {
 		contentPane.add(questionTextArea);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.setForeground(new Color(255, 255, 255));
+		btnDelete.setBackground(new Color(255, 0, 0));
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deleteQuestion();
