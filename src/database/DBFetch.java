@@ -79,7 +79,7 @@ public class DBFetch {
             
             
         } catch (SQLException e) {
-            System.out.println("Error fetching all questions: " + e.getMessage());
+            System.out.println("Error fetching the questions: " + e.getMessage());
             e.printStackTrace();
         }
         return questions;

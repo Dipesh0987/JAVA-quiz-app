@@ -11,7 +11,6 @@ public class DBUpdate {
         String dbUsername = "root";
         String dbPassword = "";
         
-        // FIX: Use question_id instead of id
         String query = "UPDATE questions SET " +
                       "question_text = ?, " +
                       "option_a = ?, " +
@@ -34,7 +33,7 @@ public class DBUpdate {
             pstmt.setString(5, optD);
             pstmt.setString(6, correctOpt);
             pstmt.setString(7, difficulty);
-            pstmt.setInt(8, questionId); // This is the WHERE clause parameter
+            pstmt.setInt(8, questionId); 
             
             int rowsAffected = pstmt.executeUpdate();
             

@@ -43,7 +43,7 @@ public class DBInsertion {
             return -1; // Return -1 if insertion failed
             
         } catch (SQLException e) {
-            System.out.println("Error inserting question: " + e.getMessage());
+            System.out.println("Error inserting the question to database: " + e.getMessage());
             e.printStackTrace();
             return -1; // Return -1 on error
         }

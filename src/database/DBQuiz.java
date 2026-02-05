@@ -39,7 +39,7 @@ public class DBQuiz {
             System.out.println("Loaded " + questions.size() + " questions for difficulty: " + difficulty);
 
         } catch (SQLException e) {
-            System.out.println("Error fetching questions: " + e.getMessage());
+            System.out.println("Error fetching the questions: " + e.getMessage());
             e.printStackTrace();
         }
         return questions;
@@ -144,10 +144,10 @@ public class DBQuiz {
             }
 
             conn.commit();
-            System.out.println("Player stats updated for user: " + userId);
+            System.out.println("Player statistics updated for user: " + userId);
 
         } catch (SQLException e) {
-            System.out.println("Error updating player stats: " + e.getMessage());
+            System.out.println("Error updating player status: " + e.getMessage());
             e.printStackTrace();
         }
     }

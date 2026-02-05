@@ -25,7 +25,7 @@ public class DBDelete {
             return rowsAffected > 0;
             
         } catch (SQLException e) {
-            System.out.println("Error deleting question: " + e.getMessage());
+            System.out.println("Error deleting the question: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

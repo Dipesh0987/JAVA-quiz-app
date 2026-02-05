@@ -26,7 +26,7 @@ public class DBLogin {
             return rs.next(); // Returns true if user exists
             
         } catch (SQLException e) {
-            System.out.println("Error during authentication: " + e.getMessage());
+            System.out.println("Error occurred: " + e.getMessage());
             return false;
         }
     }
