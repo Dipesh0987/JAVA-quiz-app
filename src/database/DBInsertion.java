@@ -2,9 +2,27 @@ package database;
 
 import java.sql.*;
 
+/**
+ * Handles database operations for inserting new questions into the quiz system database.
+ * This class provides methods to add new quiz questions to the database.
+ * 
+ */
+
 public class DBInsertion {
-    
-    // Modified to return the generated question ID
+	/**
+     * Inserts a new question into the database and returns the generated ID.
+     * 
+     * @param question The question text
+     * @param optA Option A text
+     * @param optB Option B text
+     * @param optC Option C text
+     * @param optD Option D text
+     * @param correctOpt The correct option (A, B, C, or D)
+     * @param difficulty The difficulty level (Beginner, Intermediate, Advanced)
+     * @return The generated question ID if successful, -1 otherwise
+     * @throws SQLException if a database access error occurs
+     */
+	
     public static int insertQuestion(String question, String optA, String optB, 
                                      String optC, String optD, String correctOpt, 
                                      String difficulty) {
@@ -12,7 +30,7 @@ public class DBInsertion {
         String dbUsername = "root";
         String dbPassword = "";
         
-        // IMPORTANT: Add Statement.RETURN_GENERATED_KEYS
+        //query to insert new question
         String query = "INSERT INTO questions (question_text, option_a, option_b, " +
                       "option_c, option_d, correct_answer, difficulty_level) " +
                       "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -31,21 +49,21 @@ public class DBInsertion {
             int affectedRows = pstmt.executeUpdate();
             
             if (affectedRows > 0) {
-                // Get the generated question ID
+                //generated question id
                 ResultSet generatedKeys = pstmt.getGeneratedKeys();
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1);
                     System.out.println("Inserted question with ID: " + generatedId);
-                    return generatedId; // Return the generated question ID
+                    return generatedId;
                 }
             }
             System.out.println("No rows affected or no generated keys");
-            return -1; // Return -1 if insertion failed
+            return -1;
             
         } catch (SQLException e) {
             System.out.println("Error inserting the question to database: " + e.getMessage());
             e.printStackTrace();
-            return -1; // Return -1 on error
+            return -1;
         }
     }
 }

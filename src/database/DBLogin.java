@@ -6,9 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Handles user authentication and role management for the quiz system.
+ * This class provides methods that verify user credentials and retrieve user information.
+ * 
+ */
+
 public class DBLogin {
-    
-    // Authenticate user
+	/**
+     * Authenticates a user by checking username and password.
+     * 
+     * @param username The username to authenticate
+     * @param password The password to verify
+     * @return true if authentication successful, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
+	
     public static boolean authenticate(String username, String password) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -32,6 +45,14 @@ public class DBLogin {
     }
     
     // Get user role
+    /**
+     * Retrieves the role of a specific user.
+     * 
+     * @param username The username to get role for
+     * @return The user's role (admin, player, etc.) or null if user not found
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static String getUserRole(String username) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -56,13 +77,20 @@ public class DBLogin {
         }
     }
     
-    // Get user ID (add this method)
+    /**
+     * Retrieves the user ID for a specific username.
+     * 
+     * @param username The username to get ID for
+     * @return The user's ID or -1 if user not found
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static int getUserId(String username) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
         String password = "";
         
-        String query = "SELECT id FROM users WHERE username = ?";  // Changed to id
+        String query = "SELECT id FROM users WHERE username = ?";
         
         try (Connection conn = DriverManager.getConnection(url, dbUsername, password);
              PreparedStatement pstmt = conn.prepareStatement(query)) {

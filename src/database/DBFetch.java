@@ -5,15 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 import models.Question;
 
+/**
+ * Handles database operations for retrieving questions from the quiz system.
+ * This class provides methods to fetch questions.
+ * 
+ */
 public class DBFetch {
-    
-    // Get question by ID
+	
+	 /**
+     * Retrieves a specific question from the database using its ID.
+     * 
+     * @param id The unique ID of the question for retrieve
+     * @return Question object if found, null otherwise
+     * @throws SQLException if a database access error occurs
+     */
+
     public static Question getQuestionById(int id) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
         String dbPassword = "";
         
-        // Make sure column names match your database table
+        //query to select question by id
         String query = "SELECT * FROM questions WHERE question_id = ?";
         
         System.out.println("Searching for question ID: " + id);
@@ -49,8 +61,13 @@ public class DBFetch {
         }
         return null;
     }
-    
-    // Get all questions
+    /**
+     * Retrieves all questions from the database.
+     * 
+     * @return List of all Question objects in the database
+     * @throws SQLException if a database access error occurs
+     */
+    //all questions
     public static List<Question> getAllQuestions() {
         List<Question> questions = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";

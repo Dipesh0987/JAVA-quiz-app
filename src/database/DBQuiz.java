@@ -5,9 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 import models.Question;
 
+/**
+ * Handles quiz-specific database operations including game play, scoring,
+ * leaderboards, and player statistics.
+ * This class is for quiz game functionality.
+ * 
+ */
+
 public class DBQuiz {
 
-    // Get questions by difficulty
+	/**
+     * Retrieves questions based on difficulty level with random ordering.
+     * 
+     * @param difficulty The difficulty level (Beginner, Intermediate, Advanced)
+     * @param limit The maximum number of questions to retrieve
+     * @return List of Question objects for the specified difficulty
+     * @throws SQLException if a database access error occurs
+     */
+	
     public static List<Question> getQuestionsByDifficulty(String difficulty, int limit) {
         List<Question> questions = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -44,8 +59,18 @@ public class DBQuiz {
         }
         return questions;
     }
-
-    // Save score to database
+    /**
+     * Saves a player score to the database and update to database.
+     * 
+     * @param userId The ID of the user
+     * @param difficulty The difficulty level played
+     * @param round The number of round
+     * @param score The score achieved
+     * @param totalQuestions Total questions in the round
+     * @return true if save successful, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static boolean saveScore(int userId, String difficulty, int round,
             int score, int totalQuestions) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -80,7 +105,16 @@ public class DBQuiz {
         }
         return false;
     }
-
+    /**
+     * Update player statistics in database.
+     * This method is called when a score is saved.
+     * 
+     * @param userId The ID of the user
+     * @param score The score achieved
+     * @param totalQuestions Total questions in the round
+     * @throws SQLException if a database access error occurs
+     */
+    
     // Update player statistics
     private static void updatePlayerStats(int userId, int score, int totalQuestions) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -120,7 +154,6 @@ public class DBQuiz {
                 updateStmt.executeUpdate();
 
             } else {
-                // Insert new stats - need username first
                 String getUsernameQuery = "SELECT username FROM users WHERE id = ?";
                 PreparedStatement getUsernameStmt = conn.prepareStatement(getUsernameQuery);
                 getUsernameStmt.setInt(1, userId);
@@ -151,8 +184,17 @@ public class DBQuiz {
             e.printStackTrace();
         }
     }
-
-    // Update difficulty statistics (for Leaderboard)
+    /**
+     * Updates difficulty-specific statistics for leaderboards.
+     * This method is called when a score is saved.
+     * 
+     * @param userId The ID of the user
+     * @param difficulty The difficulty level
+     * @param score The score achieved
+     * @param totalQuestions Total questions in the round
+     * @throws SQLException if a database access error occurs
+     */
+    
     private static void updateDifficultyStats(int userId, String difficulty, int score, int totalQuestions) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -161,7 +203,7 @@ public class DBQuiz {
         try (Connection conn = DriverManager.getConnection(url, dbUsername, dbPassword)) {
             conn.setAutoCommit(false);
 
-            // Check if stats exist for this user AND difficulty
+            // Check if stats exist for user and difficulty
             String checkQuery = "SELECT * FROM difficulty_stats WHERE user_id = ? AND difficulty_level = ?";
             PreparedStatement checkStmt = conn.prepareStatement(checkQuery);
             checkStmt.setInt(1, userId);
@@ -221,8 +263,14 @@ public class DBQuiz {
             e.printStackTrace();
         }
     }
-
-    // Get user scores
+    /**
+     * Retrieves all scores for a specific user.
+     * 
+     * @param userId The ID of the user
+     * @return List of score data containing difficulty, round, score, success_rate and date
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static List<String[]> getUserScores(int userId) {
         List<String[]> scores = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -257,8 +305,15 @@ public class DBQuiz {
         }
         return scores;
     }
-
-    // Get leaderboard
+    
+    /**
+     * Retrieves the leaderboard of all players.
+     * 
+     * @param limit The maximum number of players to return
+     * @return List of player data containing rank, username, games played, correct answers, success rate and last active
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static List<String[]> getLeaderboard(int limit) {
         List<String[]> leaderboard = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -271,7 +326,7 @@ public class DBQuiz {
                 "IFNULL(ps.success_rate, 0) as success_rate, " +
                 "IFNULL(ps.last_active, 'Never') as last_active " +
                 "FROM users u " +
-                "LEFT JOIN players_stats ps ON u.id = ps.user_id " + // Changed to u.id
+                "LEFT JOIN players_stats ps ON u.id = ps.user_id " + 
                 "WHERE u.role = 'player' OR u.role = 'user' " +
                 "ORDER BY ps.success_rate DESC, ps.total_correct_answers DESC " +
                 "LIMIT ?";
@@ -302,9 +357,15 @@ public class DBQuiz {
         }
         return leaderboard;
     }
-
-    // Get user ID by username
-    // In DBQuiz.java, update getUserId method:
+    
+    /**
+     * Retrieves user ID by username.
+     * 
+     * @param username The username to search for
+     * @return User ID if found, 1 (admin ID) as fallback if not found
+     * @throws SQLException if a database access error occurs
+     */	
+    
     public static int getUserId(String username) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -333,8 +394,16 @@ public class DBQuiz {
             return 1; // Return default user ID as fallback
         }
     }
-
-    // Register new user
+    /**
+     * Registers a new user in the system.
+     * 
+     * @param username The desired username
+     * @param password The user's password
+     * @param email The user's email address
+     * @return true if registration successful, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static boolean registerUser(String username, String password, String email) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -364,8 +433,14 @@ public class DBQuiz {
             return false;
         }
     }
-
-    // Check if username is taken
+    /**
+     * Checks if a username is already taken in the database.
+     * 
+     * @param username The username to check
+     * @return true if username exists, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
+    
     private static boolean isUsernameTaken(String username) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -385,8 +460,14 @@ public class DBQuiz {
             return false;
         }
     }
-
-    // Add this method to DBQuiz.java
+    /**
+     * Clears all scores for a specific user.
+     * 
+     * @param userId The ID of the user
+     * @return true if scores were cleared, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static boolean clearUserScores(int userId) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -409,9 +490,15 @@ public class DBQuiz {
             return false;
         }
     }
-    // Add these methods to DBQuiz.java
-
-    // Get leaderboard by difficulty
+    /**
+     * Retrieves leaderboard filtered by difficulty level.
+     * 
+     * @param difficulty The difficulty level to filter by (or "All" for all difficulties)
+     * @param limit The maximum number of players to return
+     * @return List of player data with detailed statistics
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static List<String[]> getLeaderboardByDifficulty(String difficulty, int limit) {
         List<String[]> leaderboard = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -485,8 +572,14 @@ public class DBQuiz {
         }
         return leaderboard;
     }
-
-    
+    /**
+     * Retrieves a user's rank for a specific difficulty level.
+     * 
+     * @param username The username to check rank for
+     * @param difficulty The difficulty level
+     * @return Formatted string containing rank information or error message
+     * @throws SQLException if a database access error occurs
+     */
     public static String getUserRank(String username, String difficulty) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
@@ -495,7 +588,7 @@ public class DBQuiz {
         String query;
         
         if ("All".equals(difficulty)) {
-            // For "All" difficulty, aggregate stats across all difficulties
+            // For "All" difficulty level
             query = "SELECT rank, total_players, total_correct, total_wrong FROM (" +
                     "SELECT u.username, " +
                     "SUM(ds.total_correct_answers) as total_correct, " +
@@ -508,7 +601,7 @@ public class DBQuiz {
                     "GROUP BY u.id, u.username) ranked " +
                     "WHERE username = ?";
         } else {
-            // For specific difficulty
+            // For specific difficulty level
             query = "SELECT rank, total_players, total_correct_answers, total_wrong_answers FROM (" +
                     "SELECT u.username, ps.difficulty_level, " +
                     "ps.total_correct_answers, ps.total_wrong_answers, " +
@@ -560,7 +653,13 @@ public class DBQuiz {
             return "Error retrieving rank. Please try again.";
         }
     }
-    // Get all players for Admin Panel
+    /**
+     * Retrieves all players in the system for admin panel.
+     * 
+     * @return List of player data containing ID, username and email
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static List<String[]> getAllPlayers() {
         List<String[]> players = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";
@@ -588,15 +687,20 @@ public class DBQuiz {
         }
         return players;
     }
-
-    // Get all statistics for Admin Panel
+    /**
+     * Retrieves all statistics for admin panel display.
+     * 
+     * @return List of statistic arrays containing ID, username and stats
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static List<String[]> getAllStatistics() {
         List<String[]> stats = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
         String dbPassword = "";
 
-        // Aggregate stats per user
+        //stats per user
         String query = "SELECT u.id, u.username, " +
                 "IFNULL(SUM(ds.total_games_played), 0) as total_games, " +
                 "IFNULL(AVG(ds.success_rate), 0) as avg_success " +
@@ -625,8 +729,14 @@ public class DBQuiz {
         }
         return stats;
     }
-
-    // Get detailed player statistics for Admin Panel
+    /**
+     * Retrieves detailed statistics for a specific player.
+     * 
+     * @param userId The ID of the user
+     * @return Map containing detailed statistics (games played, questions attempted, best score, etc.)
+     * @throws SQLException if a database access error occurs
+     */
+    
     public static java.util.Map<String, String> getPlayerDetailedStats(int userId) {
         java.util.Map<String, String> stats = new java.util.HashMap<>();
         String url = "jdbc:mysql://localhost:3306/quiz_app";

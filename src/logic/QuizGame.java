@@ -31,8 +31,7 @@ public class QuizGame {
     }
 
     private void loadQuestions() {
-        // Load all questions needed for the game (5 rounds × 5 questions = 25
-        // questions)
+        // Load all questions the game (5 rounds × 5 questions = 25 questions)
         allQuestions = DBQuiz.getQuestionsByDifficulty(difficulty, TOTAL_QUESTIONS);
 
         if (allQuestions.size() < TOTAL_QUESTIONS) {
