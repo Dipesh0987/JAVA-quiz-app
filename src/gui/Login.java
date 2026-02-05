@@ -15,6 +15,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
+/**
+ * Login window for the Quiz Mania application.
+ * Provides a user interface for users to enter credentials and log in.
+ * Authenticates users from the database and redirects to dashboard.
+ * 
+ */
+
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +31,7 @@ public class Login extends JFrame {
 
 	/**
 	 * Launch the application.
+	 *  @param args Command line arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -104,11 +112,17 @@ public class Login extends JFrame {
 		contentPane.add(register);
 	}
 	
+	/**
+     * Performs login authentication when user clicks Login button.
+     * Validates input, checks credentials from database and redirect user.
+     * Shows appropriate error messages for failed login attempts.
+     */
+	
 	private void performLogin() {
 	    String enteredUsername = username.getText().trim();
 	    String enteredPassword = new String(password.getPassword()).trim();
 
-	    // Step 1: Check for empty inputs
+	    //Check for empty inputs
 	    if (enteredUsername.isEmpty() || enteredPassword.isEmpty()) {
 	        JOptionPane.showMessageDialog(this, 
 	            "Please enter both username and password",
@@ -117,7 +131,7 @@ public class Login extends JFrame {
 	        return;
 	    }
 
-	    // Step 2: Try to authenticate against database
+	    //authentication
 	    if (DBLogin.authenticate(enteredUsername, enteredPassword)) {
 	        // Success
 	        String role = DBLogin.getUserRole(enteredUsername);
@@ -131,21 +145,17 @@ public class Login extends JFrame {
 	            AdminPanel adminPanel = new AdminPanel();
 	            adminPanel.setVisible(true);
 	        } else {
-	            // Assuming most other roles are normal users
 	            UserDashboard userDashboard = new UserDashboard(enteredUsername);
 	            userDashboard.setVisible(true);
 	        }
 	        
-	        dispose();  // close login window
+	        dispose();
 	    } 
 	    else {
-	        // ← This is the missing part!
 	        JOptionPane.showMessageDialog(this, 
 	            "Incorrect username or password", 
 	            "Login Failed", 
 	            JOptionPane.ERROR_MESSAGE);
-	        
-	        // Optional: clear password field after failed attempt
 	        password.setText("");
 	        password.requestFocus();
 	    }

@@ -17,6 +17,13 @@ import javax.swing.JOptionPane;
 import logic.QuizGame;
 import database.DBQuiz;
 
+/**
+ * Main game interface for playing quiz in Quiz Mania.
+ * Provides the interactive quiz environment where players can answer questions,
+ * track scores and progress through rounds. Handles game flow, scoring,
+ * and user interaction for the quiz gameplay experience.
+ * 
+ */
 public class PlayQuiz extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,9 +32,7 @@ public class PlayQuiz extends JFrame {
 	
 	// Game components
 	private QuizGame quizGame;
-	private String username; // Store username separately
-	
-	// UI Components
+	private String username;
 	private JLabel difficultyLabel;
 	private JLabel roundLabel;
 	private JLabel scoreLabel;
@@ -40,16 +45,24 @@ public class PlayQuiz extends JFrame {
 	private JButton nextButton;
 
 	/**
-	 * Constructor with parameters
-	 */
+     * Creates a new PlayQuiz window with specified difficulty and user.
+     * Initializes the game logic and user interface for quiz gameplay.
+     * 
+     * @param difficulty The difficulty level (Beginner, Intermediate, Advanced)
+     * @param username The username of the player
+     */
 	public PlayQuiz(String difficulty, String username) {
-		this.username = username; // Store username
+		this.username = username;
 		int userId = DBQuiz.getUserId(username);
 		this.quizGame = new QuizGame(difficulty, username, userId);
 		initialize();
 		startGame();
 	}
-	
+	/**
+     * Initializes the PlayQuiz GUI components and layout.
+     * Sets up the game interface including question display, answer options
+     * and navigation controls.
+     */
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Changed from EXIT_ON_CLOSE
 		setBounds(100, 100, 650, 500);
@@ -171,7 +184,10 @@ public class PlayQuiz extends JFrame {
 		lblOptionD.setBounds(330, 285, 20, 20);
 		contentPane.add(lblOptionD);
 	}
-	
+	/**
+     * Starts the quiz game after validation checks.
+     * Verifies sufficient questions are available and initializes the first question.
+     */
 	private void startGame() {
 		if (!quizGame.hasEnoughQuestions()) {
 			JOptionPane.showMessageDialog(this, 
@@ -186,7 +202,10 @@ public class PlayQuiz extends JFrame {
 		updateUI();
 		loadCurrentQuestion();
 	}
-	
+	/**
+     * Loads the current question from the quiz game into the UI.
+     * Displays question text and answer options. Handles game completion.
+     */
 	private void loadCurrentQuestion() {
 		if (quizGame.isGameComplete()) {
 			endGame();
@@ -208,11 +227,12 @@ public class PlayQuiz extends JFrame {
 		
 		// Clear selection
 		optionGroup.clearSelection();
-		
-		// Update UI labels
 		updateUI();
 	}
-	
+	/**
+     * Updates all UI labels with current game state information.
+     * Refreshes difficulty, round, score and question number displays.
+     */
 	private void updateUI() {
 		difficultyLabel.setText("Difficulty: " + quizGame.getDifficulty());
 		roundLabel.setText("Round: " + quizGame.getCurrentRound() + "/" + quizGame.getTotalRounds());
@@ -227,7 +247,11 @@ public class PlayQuiz extends JFrame {
 			nextButton.setText("Submit Answer");
 		}
 	}
-	
+	/**
+     * Processes the player's answer selection.
+     * Validates that an option is selected, submits answer to game logic
+     * and handles round completion or game end as needed.
+     */
 	private void processAnswer() {
 		// Check if an option is selected
 		String selectedAnswer = getSelectedAnswer();
@@ -252,7 +276,11 @@ public class PlayQuiz extends JFrame {
 			loadCurrentQuestion();
 		}
 	}
-	
+	/**
+     * Gets the currently selected answer option.
+     * 
+     * @return The selected option (A, B, C or D) or null if no selection
+     */
 	private String getSelectedAnswer() {
 		if (optionA.isSelected()) return "A";
 		if (optionB.isSelected()) return "B";
@@ -260,7 +288,10 @@ public class PlayQuiz extends JFrame {
 		if (optionD.isSelected()) return "D";
 		return null;
 	}
-	
+	/**
+     * Shows round completion results and prompts for next round.
+     * Displays round score and total score, asks user to continue or quit.
+     */
 	private void showRoundResults() {
 	    String message = String.format("Round %d Complete!\n\n" +
 	        "Round Score: %d/%d\n" +
@@ -285,9 +316,12 @@ public class PlayQuiz extends JFrame {
 	        returnToDashboard();
 	    }
 	}
-	
+	/**
+     * Ends the game and displays final results.
+     * Saves final score to database and shows comprehensive statistics.
+     */
 	private void endGame() {
-	    // FIX: Only save game once - check if already saved
+	    
 	    if (!quizGame.isGameSaved()) {
 	        // Save final score
 	        quizGame.saveGame();
@@ -314,7 +348,10 @@ public class PlayQuiz extends JFrame {
 	    
 	    returnToDashboard();
 	}
-	
+	/**
+     * Handles game quit with confirmation and progress saving.
+     * Asks user to confirm quit and saves current progress before exiting.
+     */
 	private void quitGame() {
 		int confirm = JOptionPane.showConfirmDialog(this, 
 			"Are you sure you want to quit?\nYour progress will be saved.",
@@ -325,17 +362,23 @@ public class PlayQuiz extends JFrame {
 			returnToDashboard();
 		}
 	}
-	
+	/**
+     * Returns to the user dashboard after game completion or quit.
+     * Preserves username context for proper dashboard initialization.
+     */
 	private void returnToDashboard() {
 		// Always pass the username when creating a new dashboard
 		UserDashboard dashboard = new UserDashboard(username);
 		dashboard.setVisible(true);
-		dispose(); // Only dispose the PlayQuiz window, not the entire application
+		dispose(); // Only dispose the PlayQuiz window
 	}
 	
 	/**
-	 * Launch the application for testing
-	 */
+     * Launch the application for testing.
+     * Creates a test instance of PlayQuiz with beginner difficulty.
+     * 
+     * @param args Command line arguments (not used)
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

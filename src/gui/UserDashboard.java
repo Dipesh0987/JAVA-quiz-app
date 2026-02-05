@@ -14,6 +14,14 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
+/**
+ * User Dashboard - Main Menu After Login
+ * 
+ * This window is displayed after a user successfull log in to Quiz Mania.
+ * It provides access to all main features of the quiz application through
+ * simple buttons and dropdown menus.
+ * 
+ */
 public class UserDashboard extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -23,6 +31,7 @@ public class UserDashboard extends JFrame {
 
     /**
      * Launch the application.
+     * @param args Command line arguments
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {

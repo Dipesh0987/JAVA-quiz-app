@@ -18,7 +18,12 @@ import javax.swing.JOptionPane;
 // Import the MySQL database classes
 import database.DBInsertion;
 import java.awt.Color;
-
+/**
+ * Add window for admin to add question to database for Quiz Mania.
+ * Provides interface for admin to enter the questions, options, correct option and difficulty level.
+ * Validates input before adding the question to the database.
+ * 
+ */
 public class AddGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -33,6 +38,7 @@ public class AddGUI extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @param args Command line arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -165,7 +171,11 @@ public class AddGUI extends JFrame {
 		add.setBounds(205, 371, 84, 32);
 		contentPane.add(add);
 	}
-	
+	/**
+     * Validates input and adds a new question to the database.
+     * Performs validation checks on all fields before attempting database insertion.
+     * Shows appropriate success or error messages to the user.
+     */
 	private void addQuestionToDatabase() {
 		// Validate inputs
 		String questionText = questiontextArea.getText().trim();
@@ -202,7 +212,7 @@ public class AddGUI extends JFrame {
 			return;
 		}
 		
-		// Insert question into MySQL database and get the generated question ID
+		// Insert question into database and get the generated question ID
 		int questionId = DBInsertion.insertQuestion(
 			questionText, optA, optB, optC, optD, correctOpt, difficulty
 		);
@@ -222,7 +232,10 @@ public class AddGUI extends JFrame {
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+     * Clears all form fields
+     * Sets focus back to the question text area for quick entry of next question.
+     */
 	private void clearForm() {
 		questiontextArea.setText("");
 		optionA.setText("");

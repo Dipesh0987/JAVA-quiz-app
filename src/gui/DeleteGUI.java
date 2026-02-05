@@ -19,6 +19,12 @@ import database.DBDelete;
 import models.Question;
 import java.awt.Color;
 
+/**
+ * Delete window for admin to remove questions from the Quiz Mania database.
+ * Provides interface to search for questions by ID and delete them after confirmation.
+ * Includes validation and safety measures to prevent accidental deletion.
+ * 
+ */
 public class DeleteGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -28,8 +34,11 @@ public class DeleteGUI extends JFrame {
 	private Question currentQuestion;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application
+     * Creates and displays the Delete Questions window.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -126,7 +135,11 @@ public class DeleteGUI extends JFrame {
 		contentPane.add(btnDelete);
 
 	}
-	
+	/**
+     * Searches for a question by ID in the database.
+     * Validates input, queries the database and displays the question if found.
+     * Shows error messages for invalid input or non existent questions.
+     */
 	private void searchQuestion() {
 		try {
 			String input = questionIdField.getText().trim();
@@ -139,7 +152,7 @@ public class DeleteGUI extends JFrame {
 			
 			int id = Integer.parseInt(input);
 			
-			// Use DBFetch to get question from MySQL database
+			// Use DBFetch to get question from database
 			currentQuestion = DBFetch.getQuestionById(id);
 			
 			if (currentQuestion != null) {
@@ -158,7 +171,11 @@ public class DeleteGUI extends JFrame {
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+     * Deletes the currently displayed question from the database.
+     * Shows a confirmation dialog with question details before deletion.
+     * Only proceeds if user confirms and question exists in memory.
+     */
 	private void deleteQuestion() {
 		if (currentQuestion == null) {
 			JOptionPane.showMessageDialog(this, 
@@ -194,7 +211,10 @@ public class DeleteGUI extends JFrame {
 			}
 		}
 	}
-	
+	/**
+     * Clears all form fields and resets the current question reference.
+     * Sets focus back to the question ID field for quick entry of next search.
+     */
 	private void clearForm() {
 		questionIdField.setText("");
 		questionTextArea.setText("");

@@ -18,6 +18,13 @@ import javax.swing.JScrollPane;
 import database.DBQuiz;
 import java.awt.Color;
 
+/**
+ * Score View window for players to review their quiz performance history.
+ * Displays all quiz scores with detailed statistics including difficulty,
+ * round numbers, success rates and timestamps. 
+ * Provides ability to clear all scores with confirmation.
+ * 
+ */
 public class ScoreViewGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -27,8 +34,11 @@ public class ScoreViewGUI extends JFrame {
 	private int userId;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application
+     * Creates and displays the Score View window with test user.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,15 +53,21 @@ public class ScoreViewGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
+     * Creates a Score View window for a specific user.
+     * Initializes the interface and loads the user's score history.
+     * 
+     * @param username The username of the currently logged-in player
+     */
 	public ScoreViewGUI(String username) {
 		this.currentUsername = username;
 		this.userId = DBQuiz.getUserId(username);
 		initialize();
 		loadScores();
 	}
-	
+	/**
+     * Initializes the Score View GUI components.
+     * Sets up the scores table, navigation buttons and statistics display.
+     */
 	private void initialize() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 450);
@@ -98,7 +114,7 @@ public class ScoreViewGUI extends JFrame {
 		) {
 			 @Override
 			    public boolean isCellEditable(int row, int column) {
-			        // Make all cells non-editable
+			        
 			        return false;
 			    }
 		});
@@ -128,7 +144,12 @@ public class ScoreViewGUI extends JFrame {
 		btnClearAll.setBounds(518, 370, 150, 30);
 		contentPane.add(btnClearAll);
 	}
-	
+	/**
+     * Loads the user's score history from the database into the table.
+     * Calculates and displays aggregate statistics including total games
+     * and average success rate. 
+     * Shows appropriate message if no scores exist.
+     */
 	private void loadScores() {
 		DefaultTableModel model = (DefaultTableModel) scoresTable.getModel();
 		model.setRowCount(0);
@@ -144,7 +165,6 @@ public class ScoreViewGUI extends JFrame {
 			}
 		}
 		
-		// Update stats label
 		double totalSuccess = 0;
 		int totalGames = scores.size();
 		for (String[] score : scores) {
@@ -160,7 +180,11 @@ public class ScoreViewGUI extends JFrame {
 		lblStats.setBounds(20, 380, 300, 25);
 		contentPane.add(lblStats);
 	}
-	
+	/**
+     * Clears all scores for the current user with confirmation.
+     * Shows warning dialog before irreversible deletion. 
+     * Updates table after successful deletion or shows error message if deletion fails.
+     */
 	private void clearAllScores() {
 	    // Show confirmation dialog
 	    int confirm = JOptionPane.showConfirmDialog(this,

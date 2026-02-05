@@ -12,14 +12,24 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Main dashboard for admin in the Quiz Mania application.
+ * Provides navigation to all administrative functions including
+ * question management, player statistics, and system administration.
+ * 
+ */
+
 public class AdminPanel extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application
+     * Creates and displays the Admin Panel window.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,8 +44,10 @@ public class AdminPanel extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
+     * Create the Admin Panel frame with all navigation buttons.
+     * Initializes the main dashboard interface for administrators
+     * with access to CRUD operations, statistics, and player management.
+     */
 	public AdminPanel() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 580, 380);
@@ -54,6 +66,7 @@ public class AdminPanel extends JFrame {
 		lblNewLabel_1.setBounds(43, 56, 137, 29);
 		contentPane.add(lblNewLabel_1);
 		
+		// Add button
 		JButton add = new JButton("Add");
 		add.setForeground(new Color(255, 255, 255));
 		add.addActionListener(new ActionListener() {
@@ -68,6 +81,7 @@ public class AdminPanel extends JFrame {
 		add.setBounds(43, 183, 84, 29);
 		contentPane.add(add);
 		
+		//View button
 		JButton view = new JButton("View");
 		view.setForeground(new Color(255, 255, 255));
 		view.addActionListener(new ActionListener() {
@@ -82,6 +96,7 @@ public class AdminPanel extends JFrame {
 		view.setBounds(137, 183, 84, 29);
 		contentPane.add(view);
 		
+		// Update button
 		JButton Update = new JButton("Update");
 		Update.setForeground(new Color(255, 255, 255));
 		Update.addActionListener(new ActionListener() {
@@ -96,6 +111,7 @@ public class AdminPanel extends JFrame {
 		Update.setBounds(43, 226, 84, 29);
 		contentPane.add(Update);
 		
+		//delete
 		JButton delete = new JButton("Delete");
 		delete.setForeground(new Color(255, 255, 255));
 		delete.addActionListener(new ActionListener() {
@@ -115,6 +131,7 @@ public class AdminPanel extends JFrame {
 		lblNewLabel_2.setBounds(166, 95, 240, 56);
 		contentPane.add(lblNewLabel_2);
 		
+		// Logout button
 		JButton logout = new JButton("Log Out");
 		logout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

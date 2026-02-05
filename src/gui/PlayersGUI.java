@@ -15,6 +15,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 
+/**
+ * Player Management window for administrators in Quiz Mania.
+ * Provides interface to view all registered players and their detailed statistics.
+ * Shows player list with selection capability and displays comprehensive
+ * performance metrics for selected players.
+ * 
+ */
 public class PlayersGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -26,8 +33,11 @@ public class PlayersGUI extends JFrame {
 	private JLabel bestTimeLabel;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application
+     * Creates and displays the Players Management window.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,11 +52,12 @@ public class PlayersGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
+     * Create the Players Management frame with all UI components.
+     * Initializes the player list table and statistics display panel.
+     */
 	public PlayersGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 503, 550); // Increased height to accommodate details
+		setBounds(100, 100, 503, 550);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,7 +84,7 @@ public class PlayersGUI extends JFrame {
 
 		// Table setup
 		javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
-		scrollPane.setBounds(30, 60, 430, 200); // Reduced height for table
+		scrollPane.setBounds(30, 60, 430, 200);
 		contentPane.add(scrollPane);
 
 		javax.swing.JTable table = new javax.swing.JTable();
@@ -165,7 +176,12 @@ public class PlayersGUI extends JFrame {
 		// Load data
 		loadPlayers(table);
 	}
-
+	/**
+     * Loads all players from the database into the table.
+     * Retrieves player list including ID, username and email.
+     * 
+     * @param table The JTable component to display with player data
+     */
 	private void loadPlayers(javax.swing.JTable table) {
 		javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) table.getModel();
 		model.setRowCount(0);
@@ -175,7 +191,12 @@ public class PlayersGUI extends JFrame {
 			model.addRow(player);
 		}
 	}
-
+	/**
+     * Updates the statistics panel with detailed information for a selected player.
+     * Retrieves performance metrics from the database and displays them.
+     * 
+     * @param userId The ID of the player to display statistics
+     */
 	private void updateDetails(int userId) {
 		java.util.Map<String, String> stats = database.DBQuiz.getPlayerDetailedStats(userId);
 		gamesPlayedLabel.setText(stats.getOrDefault("Games Played", "0"));

@@ -22,13 +22,17 @@ import database.DBUpdate;
 import models.Question;
 import java.awt.Color;
 
+/**
+ * Update window for administrators to modify existing questions in Quiz Mania.
+ * Provides interface to search for questions by ID, edit all question properties,
+ * and save updates to the database. Includes validation and confirmation steps.
+ * 
+ */
 public class UpdateGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField questionIdField;
-	
-	// TextArea fields as class fields
 	private JTextArea questionTextArea;
 	private JTextArea optionATextArea;
 	private JTextArea optionBTextArea;
@@ -37,13 +41,15 @@ public class UpdateGUI extends JFrame {
 	private JComboBox<String> correctOptionComboBox;
 	private JComboBox<String> difficultyComboBox;
 	
-	// Store the current question being edited
 	private Question currentQuestion;
 	private boolean isQuestionLoaded = false;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application
+     * Creates and displays the Update Questions window.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,8 +64,9 @@ public class UpdateGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
+     * Create the Update Questions frame with all UI components.
+     * Initializes the search interface, editable form fields and update controls.
+     */
 	public UpdateGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 501, 475);
@@ -215,14 +222,17 @@ public class UpdateGUI extends JFrame {
 		btnUpdate.setBounds(205, 390, 96, 32);
 		contentPane.add(btnUpdate);
 		
-		// Add a status label
 		JLabel lblStatus = new JLabel("");
 		lblStatus.setFont(new Font("Times New Roman", Font.ITALIC, 12));
 		lblStatus.setBounds(31, 175, 300, 15);
 		contentPane.add(lblStatus);
 
 	}
-	
+	/**
+     * Searches for a question by ID in the database.
+     * Validates input, queries the database and loads question into form if found.
+     * Shows appropriate error messages for invalid input or non-existent questions.
+     */
 	private void searchQuestion() {
 		try {
 			String input = questionIdField.getText().trim();
@@ -234,8 +244,6 @@ public class UpdateGUI extends JFrame {
 			}
 			
 			int id = Integer.parseInt(input);
-			
-			// Use DBFetch to get question from MySQL database
 			currentQuestion = DBFetch.getQuestionById(id);
 			
 			if (currentQuestion != null) {
@@ -258,7 +266,12 @@ public class UpdateGUI extends JFrame {
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+     * Loads question details into the form fields for editing.
+     * Populates all text areas and sets the correct combo box selections.
+     * 
+     * @param question The Question object to load into the form
+     */
 	private void loadQuestionIntoForm(Question question) {
 		questionTextArea.setText(question.getQuestionText());
 		optionATextArea.setText(question.getOptionA());
@@ -285,7 +298,11 @@ public class UpdateGUI extends JFrame {
 			default: difficultyComboBox.setSelectedIndex(0);
 		}
 	}
-	
+	/**
+     * Updates the question in the database with edited values.
+     * Performs validation, shows confirmation dialog and executes database update.
+     * Provides success/error feedback and option to continue or clear form.
+     */
 	private void updateQuestion() {
 		if (!isQuestionLoaded || currentQuestion == null) {
 			JOptionPane.showMessageDialog(this, 
@@ -340,7 +357,7 @@ public class UpdateGUI extends JFrame {
 			updatedCorrectOption, 
 			updatedDifficulty
 		);
-		updatedQuestion.setId(currentQuestion.getId()); // Set the ID from current question
+		updatedQuestion.setId(currentQuestion.getId());
 		
 		// Confirm update
 		int confirm = JOptionPane.showConfirmDialog(this, 
@@ -385,7 +402,10 @@ public class UpdateGUI extends JFrame {
 			}
 		}
 	}
-	
+	/**
+     * Clears all form fields and resets the current question reference.
+     * Sets focus back to the question ID field for quick entry of next search.
+     */
 	private void clearForm() {
 		questionIdField.setText("");
 		questionTextArea.setText("");

@@ -15,6 +15,12 @@ import java.sql.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
+/**
+ * Registration window for new users to create accounts in Quiz Mania.
+ * Provides interface for users to register with username, password and email.
+ * Includes validation, duplicate checking
+ * 
+ */
 public class Register extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -24,8 +30,11 @@ public class Register extends JFrame {
 	private JTextField username;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application
+     * Creates and displays the Registration window.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,8 +49,9 @@ public class Register extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
+     * Create the Registration frame with all UI components.
+     * Initializes the registration form with input fields and buttons.
+     */
 	public Register() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 450);
@@ -108,7 +118,11 @@ public class Register extends JFrame {
 		username.setBounds(175, 100, 143, 29);
 		contentPane.add(username);
 	}
-	
+	/**
+     * Performs the user registration process with validation.
+     * Validates input fields, checks for duplicate usernames and saves to database.
+     * Shows appropriate success or error messages to the user.
+     */
 	private void performRegistration() {
 		String enteredUsername = username.getText().trim();
 		String enteredPassword = new String(password.getPassword());
@@ -158,7 +172,13 @@ public class Register extends JFrame {
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+     * Checks if a username is already taken in the database.
+     * Queries the database to verify username availability.
+     * 
+     * @param username The username to check for availability
+     * @return true if username exists, false otherwise
+     */
 	private boolean isUsernameTaken(String username) {
 		String url = "jdbc:mysql://localhost:3306/quiz_app";
 		String dbUsername = "root";
@@ -179,7 +199,15 @@ public class Register extends JFrame {
 			return false;
 		}
 	}
-	
+	/**
+     * Saves a new user to the database with 'player' role.
+     * Inserts username, password, email and default role into users table.
+     * 
+     * @param username The new username
+     * @param password The user's password
+     * @param email The user's email address
+     * @return true if registration successful, false otherwise
+     */
 	private boolean saveUserToDatabase(String username, String password, String email) {
 		String url = "jdbc:mysql://localhost:3306/quiz_app";
 		String dbUsername = "root";

@@ -14,6 +14,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
+/**
+ * Statistics window for admin to view comprehensive player performance data.
+ * Displays filtered leaderboard statistics with ability to filter by difficulty level.
+ * Shows detailed player metrics including rank, games played, correct answers,
+ * success rates, best scores and last activity.
+ * 
+ */
 public class StatisticsGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -21,8 +28,11 @@ public class StatisticsGUI extends JFrame {
 	private JTable table;
 
 	/**
-	 * Launch the application.
-	 */
+     * Launch the application - main entry point for testing.
+     * Creates and displays the Statistics window.
+     * 
+     * @param args Command line arguments
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,8 +47,9 @@ public class StatisticsGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
-	 */
+     * Create the Statistics frame with all UI components.
+     * Initializes the statistics table with difficulty filtering capability.
+     */
 	public StatisticsGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 504, 403);
@@ -83,7 +94,7 @@ public class StatisticsGUI extends JFrame {
 
 		// Table setup with ScrollPane
 		javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane();
-		scrollPane.setBounds(30, 100, 430, 250); // Adjusted bounds
+		scrollPane.setBounds(30, 100, 430, 250);
 		contentPane.add(scrollPane);
 
 		table = new JTable();
@@ -100,7 +111,6 @@ public class StatisticsGUI extends JFrame {
 				});
 		scrollPane.setViewportView(table);
 
-		// Load initial data
 		loadStatistics("All");
 
 		// Add action listener for combo box
@@ -111,7 +121,12 @@ public class StatisticsGUI extends JFrame {
 			}
 		});
 	}
-
+	/**
+     * Loads statistics from the database and displays in the table.
+     * Filters results by difficulty level and displays up to 50 records.
+     * 
+     * @param difficulty The difficulty level to filter by ("All", "Beginner", "Intermediate", "Advanced")
+     */
 	private void loadStatistics(String difficulty) {
 		DefaultTableModel model = (DefaultTableModel) table.getModel();
 		model.setRowCount(0);

@@ -20,6 +20,12 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
 
+/**
+ * Leaderboard window displaying player rankings and statistics for Quiz Mania.
+ * Shows player rankings filtered by difficulty level with ability to view
+ * individual player ranks. Provides real-time statistics and comparisons.
+ * 
+ */
 public class LeaderboardGUI extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -29,7 +35,10 @@ public class LeaderboardGUI extends JFrame {
     private JComboBox<String> difficultyComboBox;
 
     /**
-     * Launch the application.
+     * Launch the application
+     * Creates and displays the Leaderboard window with test user.
+     * 
+     * @param args Command line arguments
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -45,7 +54,10 @@ public class LeaderboardGUI extends JFrame {
     }
 
     /**
-     * Create the frame with username.
+     * Creates a Leaderboard window
+     * Initializes the interface and loads leaderboard data.
+     * 
+     * @param username The username of the currently logged-in player
      */
     public LeaderboardGUI(String username) {
         this.currentUsername = username;
@@ -55,11 +67,15 @@ public class LeaderboardGUI extends JFrame {
     
     /**
      * Default constructor for compatibility
+     * Creates a Leaderboard window with "Guest" user.
      */
     public LeaderboardGUI() {
         this("Guest");
     }
-    
+    /**
+     * Initializes the Leaderboard GUI components.
+     * Sets up the table, filter controls and navigation buttons.
+     */
     private void initialize() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 850, 550); // Increased width
@@ -154,7 +170,12 @@ public class LeaderboardGUI extends JFrame {
         btnYourRank.setFont(new Font("Times New Roman", Font.BOLD, 14));
         contentPane.add(btnYourRank);
     }
-    
+    /**
+     * Loads leaderboard data from the database and populates the table.
+     * Filters results by difficulty level and handles loading errors gracefully.
+     * 
+     * @param difficulty The difficulty level to filter by ("All", "Beginner", "Intermediate", "Advanced")
+     */
     private void loadLeaderboard(String difficulty) {
         DefaultTableModel model = (DefaultTableModel) leaderboardTable.getModel();
         model.setRowCount(0);
@@ -178,6 +199,11 @@ public class LeaderboardGUI extends JFrame {
             e.printStackTrace();
         }
     }
+    /**
+     * Displays the current user's ranking in a dialog box.
+     * Shows rank position, difficulty level and success rate.
+     * Handles cases where user has no ranking data.
+     */
     private void showUserRank() {
         String difficulty = (String) difficultyComboBox.getSelectedItem();
         String userRank = DBQuiz.getUserRank(currentUsername, difficulty);
