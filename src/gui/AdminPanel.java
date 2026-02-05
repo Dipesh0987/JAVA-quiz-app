@@ -44,9 +44,9 @@ public class AdminPanel extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Quiz Application");
+		JLabel lblNewLabel = new JLabel("Quiz Mania");
 		lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 18));
-		lblNewLabel.setBounds(210, 10, 137, 37);
+		lblNewLabel.setBounds(213, 10, 137, 37);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Welcome Admin,");

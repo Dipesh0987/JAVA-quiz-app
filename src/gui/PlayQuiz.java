@@ -60,10 +60,10 @@ public class PlayQuiz extends JFrame {
 		
 		optionGroup = new ButtonGroup();
 		
-		JLabel titleLabel = new JLabel("Kaun Banega Crorepati");
+		JLabel titleLabel = new JLabel("Quiz Mania");
 		titleLabel.setForeground(Color.BLUE);
 		titleLabel.setFont(new Font("Times New Roman", Font.BOLD, 21));
-		titleLabel.setBounds(200, 10, 246, 51);
+		titleLabel.setBounds(204, 10, 150, 51);
 		contentPane.add(titleLabel);
 		
 		difficultyLabel = new JLabel("Difficulty: ");

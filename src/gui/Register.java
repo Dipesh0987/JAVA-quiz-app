@@ -139,7 +139,7 @@ public class Register extends JFrame {
 		// Check if username already exists
 		if (isUsernameTaken(enteredUsername)) {
 			JOptionPane.showMessageDialog(this, 
-				"Username already exists! Please choose another.", 
+				"Username already exists! Please choose another one.", 
 				"Username Taken", JOptionPane.ERROR_MESSAGE);
 			return;
 		}

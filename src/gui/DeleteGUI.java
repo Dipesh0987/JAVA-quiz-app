@@ -145,7 +145,7 @@ public class DeleteGUI extends JFrame {
 			if (currentQuestion != null) {
 				questionTextArea.setText(currentQuestion.getQuestionText());
 				JOptionPane.showMessageDialog(this, 
-					"Question ID " + id + " found.\nYou can now delete it if needed.", 
+					"Question ID " + id + " found.\nYou can delete if you want to.", 
 					"Question Found", JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				JOptionPane.showMessageDialog(this, 
@@ -162,7 +162,7 @@ public class DeleteGUI extends JFrame {
 	private void deleteQuestion() {
 		if (currentQuestion == null) {
 			JOptionPane.showMessageDialog(this, 
-				"Please search for a question first before deleting.", 
+				"Please search for a question first.", 
 				"Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -184,7 +184,7 @@ public class DeleteGUI extends JFrame {
 			
 			if (success) {
 				JOptionPane.showMessageDialog(this, 
-					"Question ID " + currentQuestion.getId() + " deleted successfully from MySQL database!", 
+					"Question ID " + currentQuestion.getId() + " deleted successfully", 
 					"Success", JOptionPane.INFORMATION_MESSAGE);
 				clearForm();
 			} else {
