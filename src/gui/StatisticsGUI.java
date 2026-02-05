@@ -91,7 +91,13 @@ public class StatisticsGUI extends JFrame {
 		table.setModel(new DefaultTableModel(
 				new Object[][] {},
 				new String[] { "Rank", "Username", "Difficulty", "Games", "Correct", "Success Rate", "Best Score",
-						"Last Active" }));
+						"Last Active" }
+				) {
+					@Override
+				    public boolean isCellEditable(int row, int column) {
+				        return false;
+				    }
+				});
 		scrollPane.setViewportView(table);
 
 		// Load initial data

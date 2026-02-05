@@ -486,46 +486,80 @@ public class DBQuiz {
         return leaderboard;
     }
 
-    // Get user's rank
+    
     public static String getUserRank(String username, String difficulty) {
         String url = "jdbc:mysql://localhost:3306/quiz_app";
         String dbUsername = "root";
         String dbPassword = "";
 
-        String query = "SELECT rank, total_players FROM (" +
-                "SELECT u.username, ps.difficulty_level, ps.success_rate, " +
-                "ROW_NUMBER() OVER (ORDER BY ps.success_rate DESC, ps.total_correct_answers DESC) as rank, " +
-                "COUNT(*) OVER () as total_players " +
-                "FROM users u " +
-                "LEFT JOIN difficulty_stats ps ON u.id = ps.user_id " +
-                "WHERE (u.role = 'player' OR u.role = 'user') " +
-                "AND ps.difficulty_level = ?) ranked " +
-                "WHERE username = ?";
+        String query;
+        
+        if ("All".equals(difficulty)) {
+            // For "All" difficulty, aggregate stats across all difficulties
+            query = "SELECT rank, total_players, total_correct, total_wrong FROM (" +
+                    "SELECT u.username, " +
+                    "SUM(ds.total_correct_answers) as total_correct, " +
+                    "SUM(ds.total_wrong_answers) as total_wrong, " +
+                    "ROW_NUMBER() OVER (ORDER BY (SUM(ds.total_correct_answers) * 100.0) / (SUM(ds.total_correct_answers) + SUM(ds.total_wrong_answers)) DESC, SUM(ds.total_correct_answers) DESC) as rank, " +
+                    "COUNT(*) OVER () as total_players " +
+                    "FROM users u " +
+                    "LEFT JOIN difficulty_stats ds ON u.id = ds.user_id " +
+                    "WHERE (u.role = 'player' OR u.role = 'user') " +
+                    "GROUP BY u.id, u.username) ranked " +
+                    "WHERE username = ?";
+        } else {
+            // For specific difficulty
+            query = "SELECT rank, total_players, total_correct_answers, total_wrong_answers FROM (" +
+                    "SELECT u.username, ps.difficulty_level, " +
+                    "ps.total_correct_answers, ps.total_wrong_answers, " +
+                    "ROW_NUMBER() OVER (ORDER BY (ps.total_correct_answers * 100.0) / (ps.total_correct_answers + ps.total_wrong_answers) DESC, ps.total_correct_answers DESC) as rank, " +
+                    "COUNT(*) OVER () as total_players " +
+                    "FROM users u " +
+                    "LEFT JOIN difficulty_stats ps ON u.id = ps.user_id " +
+                    "WHERE (u.role = 'player' OR u.role = 'user') " +
+                    "AND ps.difficulty_level = ?) ranked " +
+                    "WHERE username = ?";
+        }
 
         try (Connection conn = DriverManager.getConnection(url, dbUsername, dbPassword);
                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            pstmt.setString(1, difficulty);
-            pstmt.setString(2, username);
+            if ("All".equals(difficulty)) {
+                pstmt.setString(1, username);
+            } else {
+                pstmt.setString(1, difficulty);
+                pstmt.setString(2, username);
+            }
 
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
                 int rank = rs.getInt("rank");
                 int totalPlayers = rs.getInt("total_players");
-                double successRate = rs.getDouble("success_rate");
+                int totalCorrect = rs.getInt("All".equals(difficulty) ? "total_correct" : "total_correct_answers");
+                int totalWrong = rs.getInt("All".equals(difficulty) ? "total_wrong" : "total_wrong_answers");
+                
+                // Calculate success rate manually
+                double successRate = 0;
+                if ((totalCorrect + totalWrong) > 0) {
+                    successRate = (totalCorrect * 100.0) / (totalCorrect + totalWrong);
+                }
 
-                return String.format("Rank: %d/%d\nSuccess Rate: %.2f%%",
-                        rank, totalPlayers, successRate);
+                String difficultyText = "All Difficulties".equals(difficulty) ? "All" : difficulty;
+                return String.format("Player: %s\nDifficulty: %s\nRank: %d/%d\nSuccess Rate: %.2f%%",
+                        username, difficultyText, rank, totalPlayers, successRate);
+            } else {
+                // No ranking found for this user
+                return String.format("No ranking data found for %s in %s difficulty", 
+                        username, "All".equals(difficulty) ? "any" : difficulty);
             }
 
         } catch (SQLException e) {
             System.out.println("Error getting user rank: " + e.getMessage());
             e.printStackTrace();
+            return "Error retrieving rank. Please try again.";
         }
-        return null;
     }
-
     // Get all players for Admin Panel
     public static List<String[]> getAllPlayers() {
         List<String[]> players = new ArrayList<>();

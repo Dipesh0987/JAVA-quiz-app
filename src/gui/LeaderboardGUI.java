@@ -119,7 +119,13 @@ public class LeaderboardGUI extends JFrame {
                 "Rank", "Player Name", "Difficulty", "Games Played", "Total Correct", 
                 "Success Rate", "Best Score", "Last Active"
             }
-        ));
+        ) {
+        	@Override
+            public boolean isCellEditable(int row, int column) {
+                // Make all cells non-editable
+                return false;
+            }
+        });
         scrollPane.setViewportView(leaderboardTable);
         
         JButton btnRefresh = new JButton("Refresh");
@@ -172,21 +178,19 @@ public class LeaderboardGUI extends JFrame {
             e.printStackTrace();
         }
     }
-    
     private void showUserRank() {
         String difficulty = (String) difficultyComboBox.getSelectedItem();
         String userRank = DBQuiz.getUserRank(currentUsername, difficulty);
         
-        if (userRank != null) {
+        if (userRank != null && !userRank.contains("No ranking data")) {
             JOptionPane.showMessageDialog(this, 
-                "Player: " + currentUsername + "\n" +
-                "Difficulty: " + difficulty + "\n" +
                 userRank,
                 "Your Ranking", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this,
-                "No ranking data found for " + currentUsername + " in " + difficulty,
+                userRank != null ? userRank : "No ranking data found for " + currentUsername + " in " + difficulty,
                 "No Ranking", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+    
 }

@@ -95,7 +95,13 @@ public class ScoreViewGUI extends JFrame {
 			new String[] {
 				"Difficulty", "Round", "Score", "Success Rate", "Date Played"
 			}
-		));
+		) {
+			 @Override
+			    public boolean isCellEditable(int row, int column) {
+			        // Make all cells non-editable
+			        return false;
+			    }
+		});
 		scrollPane.setViewportView(scoresTable);
 		
 		JButton btnRefresh = new JButton("Refresh");

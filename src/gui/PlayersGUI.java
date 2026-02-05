@@ -80,7 +80,13 @@ public class PlayersGUI extends JFrame {
 		table.setFont(new Font("Times New Roman", Font.PLAIN, 14));
 		table.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] {},
-				new String[] { "ID", "Username", "Email" }));
+				new String[] { "ID", "Username", "Email" }
+			) {
+				@Override
+			    public boolean isCellEditable(int row, int column) {
+			        return false;
+			    }
+			});
 		scrollPane.setViewportView(table);
 
 		// Details Panel
