@@ -11,10 +11,10 @@ public class DatabaseTests {
     @Test
     public void testDatabaseConnection() {
         // Test that database connection works
-        System.out.println("Testing database connection...");
+        System.out.println("Testing database connection");
         // Since DBConnection.main() just connects and prints, we can call it
         DBConnection.main(new String[]{});
-        System.out.println("Database connection test completed.");
+        System.out.println("Completed database connection test.");
     }
     
     @Test
@@ -56,7 +56,7 @@ public class DatabaseTests {
         
         // 6. Verify deletion
         Question deletedQuestion = DBFetch.getQuestionById(questionId);
-        assertNull(deletedQuestion, "Question should no longer exist");
+        assertNull(deletedQuestion, "Question should not exist");
     }
     
     @Test
@@ -117,7 +117,7 @@ public class DatabaseTests {
         for (String difficulty : difficulties) {
             String rank = DBQuiz.getUserRank("admin", difficulty);
             System.out.println("Rank for admin (" + difficulty + "): " + rank);
-            assertNotNull(rank, "Rank should not be null for difficulty: " + difficulty);
+            assertNotNull(rank, "Rank should not be null: " + difficulty);
         }
     }
 }

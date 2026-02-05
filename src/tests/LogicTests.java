@@ -44,7 +44,7 @@ public class LogicTests {
     
     @Test
     public void testQuizGameInitialization() {
-        System.out.println("Testing QuizGame initialization...");
+        System.out.println("Testing QuizGame initialization");
         
         assertEquals("Beginner", quizGame.getDifficulty());
         assertEquals("testPlayer", quizGame.getUsername());
@@ -61,7 +61,7 @@ public class LogicTests {
     
     @Test
     public void testSubmitCorrectAnswer() {
-        System.out.println("Testing correct answer submission...");
+        System.out.println("Testing correct answer submission");
         
         boolean roundComplete = quizGame.submitAnswer("A"); // Correct answer
         assertEquals(1, quizGame.getScore());
@@ -73,7 +73,7 @@ public class LogicTests {
     
     @Test
     public void testSubmitWrongAnswer() {
-        System.out.println("Testing wrong answer submission...");
+        System.out.println("Testing wrong answer submission");
         
         boolean roundComplete = quizGame.submitAnswer("B"); // Wrong answer
         assertEquals(0, quizGame.getScore());
@@ -85,7 +85,7 @@ public class LogicTests {
     
     @Test
     public void testCompleteOneRound() throws Exception {
-        System.out.println("Testing completion of one round...");
+        System.out.println("Testing completion of one round");
         
         // Use reflection to get the currentQuestionIndex field to verify
         Field currentQuestionIndexField = QuizGame.class.getDeclaredField("currentQuestionIndex");
@@ -114,7 +114,7 @@ public class LogicTests {
     
     @Test
     public void testMoveToNextRound() throws Exception {
-        System.out.println("Testing moving to next round...");
+        System.out.println("Testing moving to next round");
         
         // Complete first round
         for (int i = 0; i < 5; i++) {
@@ -135,7 +135,7 @@ public class LogicTests {
     
     @Test
     public void testGameCompletion() throws Exception {
-        System.out.println("Testing game completion...");
+        System.out.println("Testing game completion");
         
         // Answer all 25 questions
         for (int i = 0; i < 25; i++) {
@@ -157,7 +157,7 @@ public class LogicTests {
     
     @Test
     public void testHasEnoughQuestions() throws Exception {
-        System.out.println("Testing hasEnoughQuestions method...");
+        System.out.println("Testing hasEnoughQuestions method");
         
         assertTrue(quizGame.hasEnoughQuestions(), 
             "Should have enough questions (25 available, need 5 per round)");

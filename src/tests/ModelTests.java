@@ -8,7 +8,7 @@ public class ModelTests {
     
     @Test
     public void testQuestionModel() {
-        System.out.println("Testing Question model...");
+        System.out.println("Testing Question model");
         
         // Test constructor with all parameters
         Question question = new Question(
@@ -30,7 +30,7 @@ public class ModelTests {
     
     @Test
     public void testQuestionSettersAndGetters() {
-        System.out.println("Testing Question setters and getters...");
+        System.out.println("Testing Question setters and getters");
         
         Question question = new Question();
         
@@ -59,7 +59,7 @@ public class ModelTests {
     
     @Test
     public void testQuestionConstructorOverload() {
-        System.out.println("Testing Question constructor variations...");
+        System.out.println("Testing Question constructor variations");
         
         // Test default constructor
         Question defaultQuestion = new Question();
@@ -80,7 +80,7 @@ public class ModelTests {
     
     @Test
     public void testQuestionEdgeCases() {
-        System.out.println("Testing Question edge cases...");
+        System.out.println("Testing Question edge cases");
         
         // Test with empty strings
         Question emptyQuestion = new Question("", "", "", "", "", "", "");

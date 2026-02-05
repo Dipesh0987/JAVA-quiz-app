@@ -10,9 +10,9 @@ public class GUITests {
     
     @Test
     public void testWindowCreation() {
-        System.out.println("Testing GUI window creation...");
+        System.out.println("Testing GUI window creation");
         
-        // Test that windows can be created without errors
+        // Test that shows windows can be created without errors
         try {
             // Test Login window
             Login login = new Login();
@@ -70,9 +70,6 @@ public class GUITests {
     public void testNavigationBetweenWindows() {
         System.out.println("Testing window navigation logic...");
         
-        // This test verifies that the navigation logic in button listeners works
-        // without actually creating the windows (to avoid UI thread issues)
-        
         // Test button action command names (if set)
         Login login = new Login();
         
@@ -90,12 +87,12 @@ public class GUITests {
             "Login button should have action listeners");
         
         login.dispose();
-        System.out.println("Navigation logic test passed!");
+        System.out.println("Navigation test done!");
     }
     
     @Test 
     public void testComboBoxFunctionality() {
-        System.out.println("Testing ComboBox functionality...");
+        System.out.println("Test ComboBox functionality");
         
         UserDashboard dashboard = new UserDashboard("testUser");
         
@@ -120,6 +117,6 @@ public class GUITests {
         assertEquals("Advanced", difficultyCombo.getItemAt(3));
         
         dashboard.dispose();
-        System.out.println("ComboBox test passed!");
+        System.out.println("ComboBox test done!");
     }
 }
