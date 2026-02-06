@@ -6,8 +6,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * GUI Component Tests
+ * 
+ * This class contains JUnit tests for verifying all GUI windows
+ * and components in the Quiz Mania application. It tests window
+ * creation, component existence, navigation and UI functionality.
+ * 
+ */
 public class GUITests {
-    
+	/**
+     * Tests that all main GUI windows can be created without errors
+     * Verifies Login, AdminPanel and UserDashboard windows
+     * Checks window titles and ensures no exceptions are thrown
+     */
     @Test
     public void testWindowCreation() {
         System.out.println("Testing GUI window creation");
@@ -37,7 +49,11 @@ public class GUITests {
         }
     }
     
-    
+    /**
+     * Tests that GUI components exist and are properly initialized
+     * Specifically tests AddGUI to ensure it has required components
+     * 
+     */
     @Test
     public void testComponentExistence() {
         System.out.println("Testing GUI components...");
@@ -65,7 +81,11 @@ public class GUITests {
         addGUI.dispose();
         System.out.println("Component test passed!");
     }
-    
+    /**
+     * Tests navigation between different GUI windows
+     * Verifies that buttons have action listeners and can trigger
+     * window transitions properly
+     */
     @Test
     public void testNavigationBetweenWindows() {
         System.out.println("Testing window navigation logic...");
@@ -89,7 +109,11 @@ public class GUITests {
         login.dispose();
         System.out.println("Navigation test done!");
     }
-    
+    /**
+     * Tests ComboBox functionality in the UserDashboard
+     * Verifies that difficulty combo box has correct items
+     * and proper default selection
+     */
     @Test 
     public void testComboBoxFunctionality() {
         System.out.println("Test ComboBox functionality");

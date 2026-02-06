@@ -4,8 +4,21 @@ import models.Question;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Model Class Tests - Test Data Models and POJOs
+ * 
+ * This class contains JUnit tests for verifying the data model classes
+ * in the Quiz Mania application. It tests the Question model class
+ * including constructors, getters, setters and edge cases.
+ * 
+ */
 public class ModelTests {
-    
+	/**
+     * Tests the Question model constructor with all parameters
+     * Verifies that all properties are correctly initialized
+     * Checks question text, options, correct answer and difficulty
+     * 
+     */
     @Test
     public void testQuestionModel() {
         System.out.println("Testing Question model");
@@ -27,7 +40,11 @@ public class ModelTests {
         
         System.out.println("Constructor test passed!");
     }
-    
+    /**
+     * Tests all getter and setter methods of the Question model
+     * Sets each property individually and verifies retrieval
+     * Ensures data integrity for all model properties
+     */
     @Test
     public void testQuestionSettersAndGetters() {
         System.out.println("Testing Question setters and getters");
@@ -56,7 +73,11 @@ public class ModelTests {
         
         System.out.println("Setters and getters test passed!");
     }
-    
+    /**
+     * Tests different constructor variations of the Question model
+     * Tests both default constructor and full parameter constructor
+     * Verifies that each constructor works correctly
+     */
     @Test
     public void testQuestionConstructorOverload() {
         System.out.println("Testing Question constructor variations");
@@ -77,7 +98,12 @@ public class ModelTests {
         
         System.out.println("Constructor overload test passed!");
     }
-    
+    /**
+     * Tests edge cases and boundary conditions for Question model
+     * Includes tests with empty strings and very long strings
+     * Ensures the model handles unusual data correctly
+     * 
+     */
     @Test
     public void testQuestionEdgeCases() {
         System.out.println("Testing Question edge cases");
@@ -86,7 +112,7 @@ public class ModelTests {
         Question emptyQuestion = new Question("", "", "", "", "", "", "");
         assertEquals("", emptyQuestion.getQuestionText());
         
-        // Test with very long strings
+        // Test with long strings
         String longText = "A".repeat(1000);
         Question longQuestion = new Question(
             longText, longText, longText, longText, longText,

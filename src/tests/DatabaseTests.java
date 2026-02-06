@@ -5,23 +5,39 @@ import models.Question;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
-
+/**
+ * Test Database Operations
+ * 
+ * This class contains JUnit tests for verifying all database operations
+ * in the Quiz Mania application. It tests CRUD operations, authentication,
+ * quiz functionality and other database interactions.
+ * 
+ */
 public class DatabaseTests {
-    
+	/**
+     * Tests that the database connection can be established
+     * Calls the DBConnection main method to verify connectivity
+     */
     @Test
     public void testDatabaseConnection() {
         // Test that database connection works
         System.out.println("Testing database connection");
-        // Since DBConnection.main() just connects and prints, we can call it
         DBConnection.main(new String[]{});
         System.out.println("Completed database connection test.");
     }
-    
+    /**
+     * Tests full CRUD cycle for questions
+     * 1. Creates a test question
+     * 2. Reads it from database
+     * 3. Updates the question
+     * 4. Deletes the question
+     * Verifies each step works correctly
+     */
     @Test
     public void testQuestionCRUD() {
         // Test Create, Read, Update, Delete operations
         
-        // 1. Insert a test question
+        // 1. Create a test question
         int questionId = DBInsertion.insertQuestion(
             "Test Question from JUnit",
             "Option A", "Option B", "Option C", "Option D",
@@ -31,7 +47,7 @@ public class DatabaseTests {
         System.out.println("Inserted question ID: " + questionId);
         assertTrue(questionId > 0, "Question should be inserted successfully");
         
-        // 2. Read the question back
+        // 2. Read it from database
         Question question = DBFetch.getQuestionById(questionId);
         assertNotNull(question, "Question should be found in database");
         assertEquals("Test Question from JUnit", question.getQuestionText());
@@ -58,7 +74,10 @@ public class DatabaseTests {
         Question deletedQuestion = DBFetch.getQuestionById(questionId);
         assertNull(deletedQuestion, "Question should not exist");
     }
-    
+    /**
+     * Tests retrieving all questions from database
+     * Verifies the question list is not null and contains valid data
+     */
     @Test
     public void testGetAllQuestions() {
         List<Question> questions = DBFetch.getAllQuestions();
@@ -72,7 +91,12 @@ public class DatabaseTests {
             assertNotNull(firstQuestion.getDifficulty());
         }
     }
-    
+    /**
+     * Tests user authentication functionality
+     * - Verifies admin credentials work
+     * - Tests getting user role
+     * - Tests getting user ID
+     */
     @Test
     public void testUserAuthentication() {
         // Test login functionality
@@ -89,7 +113,12 @@ public class DatabaseTests {
         System.out.println("Admin user ID: " + userId);
         assertTrue(userId > 0);
     }
-    
+    /**
+     * Tests quiz-related database operations
+     * - Leaderboard retrieval
+     * - Question retrieval by difficulty
+     * - User registration
+     */
     @Test
     public void testQuizDatabaseOperations() {
         // Test leaderboard functionality
@@ -108,7 +137,10 @@ public class DatabaseTests {
         System.out.println("Registration result for " + testUsername + ": " + registerResult);
         assertTrue(registerResult, "New user registration should succeed");
     }
-    
+    /**
+     * Tests user ranking functionality for all difficulty levels
+     * Tests rank retrieval for Beginner, Intermediate, Advanced and All
+     */
     @Test
     public void testGetUserRank() {
         // Test rank functionality for different difficulties
