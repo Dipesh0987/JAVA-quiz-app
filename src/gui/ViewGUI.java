@@ -20,6 +20,14 @@ import database.DBFetch;
 import models.Question;
 import java.awt.Color;
 
+/**
+ * View Questions Window - Search and Display Quiz Questions
+ * 
+ * This window allows administrators to search for questions by ID
+ * and view their details. It also provides an option to view all
+ * questions in the database at once.
+ * 
+ */
 public class ViewGUI extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -36,7 +44,9 @@ public class ViewGUI extends JFrame {
 	private JTextArea difficultyTextArea;
 
 	/**
-	 * Launch the application.
+	 * Launch the application
+	 * 
+	 * @param args Command line arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -52,7 +62,7 @@ public class ViewGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Create the View Questions frame with all UI components
 	 */
 	public ViewGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -158,7 +168,6 @@ public class ViewGUI extends JFrame {
 		lblNewLabel_1_1.setBounds(44, 82, 92, 16);
 		contentPane.add(lblNewLabel_1_1);
 		
-		// Add "View All" button
 		JButton btnViewAll = new JButton("View All Questions");
 		btnViewAll.setForeground(new Color(255, 255, 255));
 		btnViewAll.setBackground(new Color(4, 121, 251));
@@ -192,7 +201,10 @@ public class ViewGUI extends JFrame {
 		lblOptionD.setBounds(234, 253, 20, 20);
 		contentPane.add(lblOptionD);
 	}
-	
+	/**
+	 * Searches for a question by ID in the database
+	 * Validates input and displays question if found
+	 */
 	private void searchQuestion() {
 		try {
 			String input = questionIdField.getText().trim();
@@ -225,7 +237,11 @@ public class ViewGUI extends JFrame {
 				"Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+	 * Displays question details in the form fields
+	 * 
+	 * @param question The Question object to display
+	 */
 	private void displayQuestionDetails(Question question) {
 		questionTextArea.setText(question.getQuestionText());
 		optionATextArea.setText(question.getOptionA());
@@ -238,7 +254,11 @@ public class ViewGUI extends JFrame {
 		// Highlight the correct option
 		highlightCorrectOption(question.getCorrectOption());
 	}
-	
+	/**
+	 * Highlights the correct answer option in green
+	 * 
+	 * @param correctOption The correct option (A, B, C, or D)
+	 */
 	private void highlightCorrectOption(String correctOption) {
 		// Reset all backgrounds first
 		optionATextArea.setBackground(java.awt.Color.WHITE);
@@ -262,7 +282,9 @@ public class ViewGUI extends JFrame {
 				break;
 		}
 	}
-	
+	/**
+	 * Clears all form fields and resets backgrounds
+	 */
 	private void clearAllFields() {
 		questionTextArea.setText("");
 		optionATextArea.setText("");
@@ -278,7 +300,10 @@ public class ViewGUI extends JFrame {
 		optionCTextArea.setBackground(java.awt.Color.WHITE);
 		optionDTextArea.setBackground(java.awt.Color.WHITE);
 	}
-	
+	/**
+	 * Displays all questions from the database
+	 * Shows question ID, text, options and correct answer
+	 */
 	private void viewAllQuestions() {
 		// Get all questions from MySQL database
 		List<Question> allQuestions = DBFetch.getAllQuestions();

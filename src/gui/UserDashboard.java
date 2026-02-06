@@ -57,12 +57,14 @@ public class UserDashboard extends JFrame {
     }
     
     /**
-     * Default constructor
+     * Create dashboard for a guest user
      */
     public UserDashboard() {
         this("Guest");
     }
-    
+    /**
+     * Set up all the UI components for the dashboard
+     */
     private void initialize() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 499, 400);
@@ -125,7 +127,6 @@ public class UserDashboard extends JFrame {
         viewScore.setBounds(30, 282, 130, 29);
         contentPane.add(viewScore);
         
-        // FIX: Remove the "JComboBox<String>" type declaration to use the class field
         difficultyComboBox = new JComboBox<>();
         difficultyComboBox.setForeground(new Color(255, 255, 255));
         difficultyComboBox.setBackground(new Color(4, 121, 251));
